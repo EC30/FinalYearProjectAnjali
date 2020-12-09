@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "709026587746",
+    "firebase_url": "https://womensafetyalertapplication.firebaseio.com",
+    "project_id": "womensafetyalertapplication",
+    "storage_bucket": "womensafetyalertapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709026587746:android:a1bb716201f0bb7c181d3b",
+        "android_client_info": {
+          "package_name": "com.anjali.womensafetyalertapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709026587746-nlkqtm9cvn86ll9ralfvg9nl49kds36c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anjali.womensafetyalertapplication",
+            "certificate_hash": "a034eeee3418e475e107e3746b64d1b62f1c85a5"
+          }
+        },
+        {
+          "client_id": "709026587746-rg5u0f0u4ck61ks577bmvir3nadjki70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHdJa8aYz1efsIa4c8cY8BXkOExwF2NW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709026587746-rg5u0f0u4ck61ks577bmvir3nadjki70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

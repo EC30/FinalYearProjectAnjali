@@ -1,3 +1,10 @@
 <resources>
     <string name="hello_world">Hello Round World!</string>
+
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_safetyTips">Women Safety Tips</string>
+    <string name="menu_defenseTips">Defense Tips</string>
+    <string name="navigation_drawer_close">Close Navigation</string>
+    <string name="navigation_drawer_open">Open Navigation</string>
 </resources>

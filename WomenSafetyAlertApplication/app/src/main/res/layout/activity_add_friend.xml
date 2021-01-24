@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".AddFriendActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondTextView">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/myCircleCardView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+
+            app:cardElevation="8dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="177dp"
+                android:background="@drawable/coloredborder"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/myCircleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/myCircleImage"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:text="My Circle"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/aclonica" />
+
+                <ImageView
+                    android:id="@+id/myCircleImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    app:srcCompat="@drawable/friend" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="8dp"
+            android:id="@+id/viewRequestCardView"
+            app:cardElevation="8dp"
+            android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/coloredborder"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/viewRequestText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/viewRequestImageView"
+                    android:textAlignment="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:text="View Request"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/aclonica" />
+                <ImageView
+                    android:id="@+id/viewRequestImageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    app:srcCompat="@drawable/ec" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_margin="10dp"
+        app:cardElevation="8dp"
+        android:id="@+id/addFriendsCardView"
+        app:cardCornerRadius="8dp"
+        android:layout_weight="1">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/coloredborder"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/addFriendsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addFriendsImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Add friends"
+                android:textSize="20sp"
+                app:fontFamily="@font/aclonica" />
+            <ImageView
+                android:id="@+id/addFriendsImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/friend" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_margin="10dp"
+        app:cardElevation="8dp"
+        android:id="@+id/viewFriendsLocationCardView"
+        app:cardCornerRadius="8dp"
+        android:layout_weight="1">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/coloredborder"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/viewFriendsLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewFriendsLocationImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="View Friends Location"
+                android:textSize="20sp"
+                app:fontFamily="@font/aclonica" />
+            <ImageView
+                android:id="@+id/viewFriendsLocationImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/friend" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

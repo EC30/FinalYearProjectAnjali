@@ -29,7 +29,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private Button logIn,signUp;
-    private TextView textErrorMain,textForgetPassword;
+    private TextView textErrorMain,textForgetPassword,textLogin;
     private EditText input_phoneText,input_passwordText;
     private CountryCodePicker countryPickerLogin;
     private ProgressDialog loadingBar;
@@ -39,19 +39,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        logIn=findViewById(R.id.btn_login);
-        signUp=findViewById(R.id.btn_signUP);
-        countryPickerLogin=findViewById(R.id.countryPickerLogin);
-        input_phoneText=findViewById(R.id.input_phoneText);
-        input_passwordText=findViewById(R.id.input_passwordText);
-        textForgetPassword=findViewById(R.id.textForgetPassword);
-        textErrorMain=findViewById(R.id.textErrorMain);
+        logIn = findViewById(R.id.btn_login);
+        signUp = findViewById(R.id.btn_signUP);
+        countryPickerLogin = findViewById(R.id.countryPickerLogin);
+        input_phoneText = findViewById(R.id.input_phoneText);
+        input_passwordText = findViewById(R.id.input_passwordText);
+        textForgetPassword = findViewById(R.id.textForgetPassword);
+        textErrorMain = findViewById(R.id.textErrorMain);
         loadingBar = new ProgressDialog(this);
+        textLogin = findViewById(R.id.textLogin);
+        startService(new Intent(MainActivity.this, GetBackgroundLocation.class));
+
+        textLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddFriendActivity.class);
+                startActivity(intent);
+            }
+        });
 
         textForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,ForgotPasswordActivity.class);
+                Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });
@@ -59,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneLogin=countryPickerLogin.getSelectedCountryCodeWithPlus().toString()+input_phoneText.getText().toString();
-                String passLogin=input_passwordText.getText().toString();
+                String phoneLogin = countryPickerLogin.getSelectedCountryCodeWithPlus().toString() + input_phoneText.getText().toString();
+                String passLogin = input_passwordText.getText().toString();
 
-                UrlClass myurl=new UrlClass();
-                String url=myurl.getUrl();
-                String loginUrl = url+"login.php";
+                UrlClass myurl = new UrlClass();
+                String url = myurl.getUrl();
+                String loginUrl = url + "login.php";
 
-                if(passLogin.length()>7 && !input_phoneText.getText().toString().equals("")) {
+                if (passLogin.length() > 7 && !input_phoneText.getText().toString().equals("")) {
                     loadingBar.setTitle("Logging In...");
                     loadingBar.setMessage("Please wait");
                     loadingBar.setCanceledOnTouchOutside(false);
@@ -83,16 +93,16 @@ public class MainActivity extends AppCompatActivity {
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            if(response.contains("Logged in Successfully.")){
+                            if (response.contains("Logged in Successfully.")) {
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(MainActivity.this, OTPActivity.class);
-                                intent.putExtra("phone_extra",phoneLogin);
-                                intent.putExtra("from","login");
+                                intent.putExtra("phone_extra", phoneLogin);
+                                intent.putExtra("from", "login");
                                 startActivity(intent);
-                            }else if(response.contains("Cannot Login. Username or password incorrect")){
+                            } else if (response.contains("Cannot Login. Username or password incorrect")) {
                                 loadingBar.dismiss();
                                 textErrorMain.setText("* Username or Password Incorrect.");
-                            }else{
+                            } else {
                                 loadingBar.dismiss();
                                 textErrorMain.setText("* Internal Error. Please try again later.");
                             }
@@ -121,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     };
                     requestQueue.add(stringRequest);
-                }else{
+                } else {
                     textErrorMain.setText("* Please Fill all required fields. Password must be at least 8 characters.");
                 }
             }

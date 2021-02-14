@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WomenSafetyAlertApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".SearchFriendActivity"></activity>
+        <activity android:name=".MapActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -28,7 +29,6 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-
         <activity android:name=".AddFriendActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".ForgotPasswordActivity" />
@@ -53,15 +53,13 @@
 
         <service
             android:name=".GetBackgroundLocation"
-            android:enabled="true" >
-        </service>
+            android:enabled="true"></service>
 
         <receiver
             android:name=".RestartBackgroundLocation"
             android:enabled="true"
             android:exported="true"
-            android:label="RestartServiceWhenStopped">
-        </receiver>
+            android:label="RestartServiceWhenStopped"></receiver>
     </application>
 
 </manifest>

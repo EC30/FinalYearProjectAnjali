@@ -9,4 +9,5 @@
     <color name="color6">#FF0000</color>
     <color name="black">#60000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="hint">#454545</color>
 </resources>

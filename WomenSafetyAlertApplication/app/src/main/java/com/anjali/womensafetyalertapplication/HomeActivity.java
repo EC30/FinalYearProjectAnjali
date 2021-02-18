@@ -19,7 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView nav_view;
-    private CardView addFriendCardView;
+    private CardView addFriendCardView,viewLocation;
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         addFriendCardView=findViewById(R.id.friendsCardView);
         setSupportActionBar(toolbar);
         nav_view.bringToFront();
+        viewLocation=findViewById(R.id.viewLocation);
         ActionBarDrawerToggle toogle=new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toogle);
         toogle.syncState();
@@ -45,6 +46,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(HomeActivity.this, AddFriendActivity.class);
+                startActivity(intent);
+            }
+        });
+        viewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this,ViewingMapActivity.class);
                 startActivity(intent);
             }
         });

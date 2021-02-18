@@ -96,7 +96,7 @@
         android:layout_height="170dp"
         android:layout_margin="10dp"
         app:cardElevation="8dp"
-        android:id="@+id/addFriendsCardView"
+        android:id="@+id/viewLocationCardView"
         app:cardCornerRadius="8dp"
         android:layout_weight="1">
         <RelativeLayout

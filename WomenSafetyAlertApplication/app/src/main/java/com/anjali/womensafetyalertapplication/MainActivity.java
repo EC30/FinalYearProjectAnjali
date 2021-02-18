@@ -29,7 +29,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private Button logIn,signUp;
-    private TextView textErrorMain,textForgetPassword,textLogin;
+    private TextView textErrorMain,textForgetPassword,textLogin,textLogo;
     private EditText input_phoneText,input_passwordText;
     private CountryCodePicker countryPickerLogin;
     private ProgressDialog loadingBar;
@@ -50,10 +50,19 @@ public class MainActivity extends AppCompatActivity {
         textLogin = findViewById(R.id.textLogin);
         startService(new Intent(MainActivity.this, GetBackgroundLocation.class));
 
+//        textLogo.findViewById(R.id.textLogo);
+//        textLogo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
         textLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddFriendActivity.class);
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

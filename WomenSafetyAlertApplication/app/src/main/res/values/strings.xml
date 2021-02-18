@@ -15,4 +15,5 @@
     <string name="menu_defenseTips">Defense Tips</string>
     <string name="navigation_drawer_close">Close Navigation</string>
     <string name="navigation_drawer_open">Open Navigation</string>
+    <string name="title_activity_viewing_map">Map</string>
 </resources>

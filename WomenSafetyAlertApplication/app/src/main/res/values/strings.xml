@@ -49,4 +49,25 @@
 
             b.      If need be approach police immediately</item>
     </string-array>
+
+    <string-array name="defenseTipsTitle">
+        <item>Start by identifying the vulnerable places on the human body.</item>
+        <item> Practice several of the simplest and most damaging moves.</item>
+        <item>If grabbed from the front, get space and attack the forehead.</item>
+        <item> Use simple escapes to free your hands.</item>
+        <item> Attacking from the side.</item>
+        <item>Attacking while cornered against a wall.</item>
+    </string-array>
+
+    <string-array name="defenseTipsBody">
+        <item>The first one is to control the wrist and spread the fingers apart. Using both hands, grab the pinky and the ring in one hand and the middle and index finger in the other. With control of the hand, pull the fingers in opposite directions and bend the wrist backward.
+
+In the second move, aim for your attacker’s throat with a fist or pointed fingers, specifically between the collarbones or into the Adam’s apple. Finally, the third move is the most universal: knee or punch the attacker in the groin and use the distraction to get away.</item>
+        <item>If you have little room and can’t lift your hands, thrust your hands forward and make a fist in front of your pelvis to get a little room from your attacker. After that, headbutt your attacker in the nose and follow that with a knee attack to the groin.</item>
+        <item>If your attacker grabs your wrist to control your hands from above, roll your wrist toward their thumb, up and through to break the grip. If your arm is underneath, you can also pull to throw the attacker off-balance.</item>
+        <item>If you are grabbed from behind, bend back to try and attack the nose with the back of the leg. Even if you miss, that’s ok—your opponent will put one of his legs forward. From this position, bend down and grab the leg and try to pull it out from underneath him.</item>
+        <item>If someone comes at you from the side, use elbow strikes to the face and groin. A well-placed strike to the side of the temple will also do a lot of damage and buy time.</item>
+        <item>What you do here largely depends on their body language and your position relative to them. The main rule is: attack the most vulnerable position. If their arms are up, attack the armpits. If one of your arms is low and free, us it to attack the neck or jaw. If you’re pinned, attack with your head.</item>
+
+    </string-array>
 </resources>

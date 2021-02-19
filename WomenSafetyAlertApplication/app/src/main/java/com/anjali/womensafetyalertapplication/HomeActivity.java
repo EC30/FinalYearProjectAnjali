@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 break;
             case R.id.nav_defenseTips:
-                Intent intent1=new Intent(HomeActivity.this,SafetyTipsActivity.class);
+                Intent intent1=new Intent(HomeActivity.this,DefenseTipsActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.logout:

@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WomenSafetyAlertApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DefenseTipsActivity"></activity>
+        <activity android:name=".AddECActivity"></activity>
+        <activity android:name=".DefenseTipsActivity" />
         <activity android:name=".SafetyTipsActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 public class DefenseTipsActivity extends AppCompatActivity {
     String s2[],s3[];
-    Integer s4[]={R.drawable.target,R.drawable.target,R.drawable.target,R.drawable.target,R.drawable.target,R.drawable.target};
+    Integer s4[]={R.drawable.target,R.drawable.damagingmoves,R.drawable.defense3,R.drawable.defense4,R.drawable.defense5,R.drawable.defense6};
     RecyclerView defenseRecyclerView;
 
     @Override

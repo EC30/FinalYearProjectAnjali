@@ -9,11 +9,11 @@
             android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_safetyTips"
             android:icon="@drawable/ic_safety"
             android:title="@string/menu_safetyTips" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_defenseTips"
             android:icon="@drawable/ic_safety"
             android:title="@string/menu_defenseTips" />
     </group>

@@ -126,7 +126,7 @@
                             android:layout_below="@id/ECImageView"
                             android:textAlignment="center"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="7dp"
                             android:text="Add Emergency Contact"
                             android:textSize="20sp"
                             app:fontFamily="@font/aclonica" />
@@ -135,7 +135,7 @@
                             android:layout_width="75dp"
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="10dp"
                             app:srcCompat="@drawable/ec" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>

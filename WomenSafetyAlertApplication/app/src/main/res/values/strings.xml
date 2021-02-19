@@ -16,4 +16,37 @@
     <string name="navigation_drawer_close">Close Navigation</string>
     <string name="navigation_drawer_open">Open Navigation</string>
     <string name="title_activity_viewing_map">Map</string>
+
+    <string-array name="SafetyTips">
+        <item>ALWAYS BE AWARE
+            While going through your day to day duties of work, kids, school run, dinner – all those fun life admin tasks that never stop, keep awareness top of mind. Regularly check on your home security and look for anything that’s out of place, don’t forget to arm your alarm when leaving in a rush, and always take note of your surroundings.
+        </item>
+        <item> TAKE SELF-DEFENSE TRAINING.
+        It is important to evaluate the goals and practical usefulness of a women’s self-defense program before signing up.</item>
+        <item>YOU HAVE A RIGHT TO FIGHT.
+        Unfortunately, no matter how diligently we practice awareness and avoidance techniques, we may find ourselves in a physical confrontation.
+            Whether or not you have self-defense training, and no matter what your age or physical condition, it is important to understand that you
+            CAN and SHOULD defend yourself physically. You have both the moral and legal right to do so, even if the attacker is only threatening you
+            and hasn’t struck first.
+        </item>
+        <item> AVOID A CAR-JACKING.
+        Lock all doors and keep windows up when driving. Most car-jackings take place when vehicles are stopped at intersections. The criminals approach at a 45-degree angle (in the blind spot), and either pull you out of the driver’s seat or jump in the passenger’s seat.
+        </item>
+        <item> BE PREPARED WHEN YOU TRAVEL.
+        Violent crimes against women happen in the best and worst hotels around the world. Predators may play the part of a hotel employee, push their way through an open or unlocked door, or obtain a pass key to the room. As with home safety, never open your door unless you are certain the person on the other side is legitimate, and always carry a door wedge with you when you travel. A wedge is often stronger than the door it secures.</item>
+        <item> NEVER PULL OVER when someone points at your car, claiming that something is wrong. Suspects use this tactic to get you to open your window or get out of the car. Rather drive to the nearest garage or shop where you will be safe to have a look yourself or can ask for assistance
+        </item>
+        <item> Please trust and make good use of your ‘gut feel’ or ‘intuition’ or ‘sixth sense’ in each and every place and situation</item>
+        <item>Make it a habit to read and notice these warning signs and go with your intuition to quickly retract yourself, move out or immediately get away from potentially unsafe situations</item>
+        <item>While using 2 wheeler be sure to wear helmet at all times (especially at night). Don’t stop for any stranger</item>
+        <item> In case you are in a sticky situation don’t be afraid to use anything in your hand to defend yourself
+
+       Use keys, bottle even your purse to inflict damage to your attacker</item>
+
+        <item> In case you feel you are being stalked or regularly followed, don’t keep it to yourself because what might be on lighter side now might become dangerous if not controlled
+
+            a.       Seek help of friends and family
+
+            b.      If need be approach police immediately</item>
+    </string-array>
 </resources>

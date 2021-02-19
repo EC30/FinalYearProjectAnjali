@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private NavigationView nav_view;
     private CardView addFriendCardView,viewLocation;
@@ -27,8 +27,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-       // phoneLogged=getIntent().getStringExtra("phone_logged");
-        //addFriendsCardView=findViewById(R.id.addFriendsCradView);
         drawer=findViewById(R.id.drawer);
         nav_view=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
@@ -40,7 +38,9 @@ public class HomeActivity extends AppCompatActivity {
         drawer.addDrawerListener(toogle);
         toogle.syncState();
 
-       // nav_view.setNavigationItemSelectedListener(this);
+        nav_view.setNavigationItemSelectedListener(HomeActivity.this);
+       // nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+        nav_view.setCheckedItem(R.id.nav_home);
 
         addFriendCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,5 +69,28 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+            case R.id.nav_home:
+                break;
+            case R.id.nav_safetyTips:
+                Intent intent=new Intent(HomeActivity.this,SafetyTipsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_defenseTips:
+                Intent intent1=new Intent(HomeActivity.this,SafetyTipsActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.logout:
+                Intent intent2=new Intent(HomeActivity.this,MainActivity.class);
+                startActivity(intent2);
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 
 }

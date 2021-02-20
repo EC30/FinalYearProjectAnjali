@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -19,18 +20,20 @@ import com.google.android.material.navigation.NavigationView;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private NavigationView nav_view;
-    private CardView addFriendCardView,viewLocation;
+    private CardView addFriendCardView,viewLocation,addEmergencyContactCardView;
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        String phone_logged=getIntent().getStringExtra("phone_logged");
 
 
         drawer=findViewById(R.id.drawer);
         nav_view=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
         addFriendCardView=findViewById(R.id.friendsCardView);
+        addEmergencyContactCardView=findViewById(R.id.addEmergencyContactCardView);
         setSupportActionBar(toolbar);
         nav_view.bringToFront();
         viewLocation=findViewById(R.id.viewLocation);
@@ -57,7 +60,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        
+        addEmergencyContactCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this,AddECActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

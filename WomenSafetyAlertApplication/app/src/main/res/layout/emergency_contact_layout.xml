@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/eccardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="-25dp"
         android:layout_margin="8dp"
+        android:padding="10dp"
         app:cardCornerRadius="8dp"
-        tools:layout_editor_absoluteY="112dp"
-        android:padding="10dp">
+        tools:layout_editor_absoluteX="-25dp"
+        tools:layout_editor_absoluteY="112dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -24,47 +24,53 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#FF1493"
                 android:orientation="horizontal"
-                android:padding="15dp"
-                android:background="#FF1493">
+                android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/idTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="5dp"
-                    android:textSize="20sp"
-                    android:gravity="center"
+                    android:shadowColor="#000000"
+                    android:text="1"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/ecNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:shadowColor="#000000" />
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:shadowColor="#000000"
+                    android:text="228282828282828"
+                    android:textSize="20sp" />
 
 
+                <ImageView
+                    android:id="@+id/bt_edit"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_edit" />
 
-                    <ImageView
-                        android:id="@+id/bt_edit"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_edit"
-                        android:layout_gravity="center"
-                        android:layout_alignParentBottom="true"/>
-
-                    <ImageView
-                        android:id="@+id/bt_delete"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="50dp"
-                        android:src="@drawable/ic_delete" />
-
-
-
+                <ImageView
+                    android:id="@+id/bt_delete"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:src="@drawable/ic_delete" />
 
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
 
 
     </androidx.cardview.widget.CardView>

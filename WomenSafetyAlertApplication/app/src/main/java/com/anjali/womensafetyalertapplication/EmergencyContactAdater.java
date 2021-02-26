@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hbb20.CountryCodePicker;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,6 +25,7 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
     Context context;
 //    ArrayList<String> id;
     ArrayList<String> number;
+    String contact_number;
 
     public EmergencyContactAdater( Context context, ArrayList<String> number) {
         this.context = context;
@@ -45,8 +49,30 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
         holder.bt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder=new AlertDialog.Builder(v.getRootView().getContext());
-                View dialogView=LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.editcontact,null);
+//                final AlertDialog.Builder builder=new AlertDialog.Builder(v.getRootView().getContext());
+//                View dialogView=LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.editcontact,null);
+//                EditText editCountryPicker;
+//                CountryCodePicker edit_phoneText;
+//                editCountryPicker=dialogView.findViewById(R.id.editCountryPicker);
+//                edit_phoneText=dialogView.findViewById(R.id.edit_phoneText);
+//                contact_number=String.valueOf(number.get(position));
+//
+//
+//                builder.setView(dialogView)
+////                .setTitle("ToDo task")
+//                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                            }
+//                        })
+//                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                            }
+//                        });
+                //builder.show();
             }
         });
 

@@ -8,7 +8,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
@@ -22,18 +24,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView nav_view;
     private CardView addFriendCardView,viewLocation,addEmergencyContactCardView;
     private Toolbar toolbar;
+    private TextView loggedUserPhone, loggedUserName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        String phone_logged=getIntent().getStringExtra("phone_logged");
+        String phone_logged2=getIntent().getStringExtra("phone_logged");
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
 
         drawer=findViewById(R.id.drawer);
         nav_view=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
+        loggedUserName=headerView.findViewById(R.id.loggedUserName);
+        loggedUserPhone=headerView.findViewById(R.id.loggedUserPhone);
         addFriendCardView=findViewById(R.id.friendsCardView);
         addEmergencyContactCardView=findViewById(R.id.addEmergencyContactCardView);
+
         setSupportActionBar(toolbar);
         nav_view.bringToFront();
         viewLocation=findViewById(R.id.viewLocation);
@@ -41,9 +49,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toogle);
         toogle.syncState();
 
+
+
         nav_view.setNavigationItemSelectedListener(HomeActivity.this);
        // nav_view.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         nav_view.setCheckedItem(R.id.nav_home);
+
+        loggedUserPhone.setText(phone_logged2);
 
         addFriendCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +105,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent1);
                 break;
             case R.id.logout:
+                SharedPreferences preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove("user_logged");
+                editor.commit();
+                finish();
                 Intent intent2=new Intent(HomeActivity.this,MainActivity.class);
                 startActivity(intent2);
                 break;

@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -46,6 +48,7 @@ public class OTPActivity extends AppCompatActivity {
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks rCallbacks;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private ProgressDialog loadingBar;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,6 +243,10 @@ public class OTPActivity extends AppCompatActivity {
 
     public void sendUserToMainActivity(){
         mAuth.signOut();
+        preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= preferences.edit();
+        editor.putString("user_logged",phone);
+        editor.commit();
         Intent intent=new Intent(OTPActivity.this,HomeActivity.class);
         intent.putExtra("phone_logged",phone);
         startActivity(intent);

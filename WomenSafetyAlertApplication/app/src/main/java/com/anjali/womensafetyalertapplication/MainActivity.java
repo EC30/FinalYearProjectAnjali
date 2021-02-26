@@ -3,7 +3,9 @@ package com.anjali.womensafetyalertapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -33,12 +35,20 @@ public class MainActivity extends AppCompatActivity {
     private EditText input_phoneText,input_passwordText;
     private CountryCodePicker countryPickerLogin;
     private ProgressDialog loadingBar;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
+        if (preferences.contains("user_logged")) {
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            intent.putExtra("phone_logged",preferences.getString("user_logged",""));
+            startActivity(intent);
+            return;
+        }
         logIn = findViewById(R.id.btn_login);
         signUp = findViewById(R.id.btn_signUP);
         countryPickerLogin = findViewById(R.id.countryPickerLogin);
@@ -145,5 +155,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

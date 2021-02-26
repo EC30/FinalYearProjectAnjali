@@ -48,14 +48,14 @@
             app:layout_constraintTop_toBottomOf="@id/editContactMessage">
 
             <com.hbb20.CountryCodePicker
-                android:id="@+id/countryPicker"
+                android:id="@+id/editCountryPicker"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:ccp_countryPreference="NP,IN,BD"
                 app:ccp_defaultNameCode="NP"/>
                 <EditText
-                    android:id="@+id/input_phoneText"
+                    android:id="@+id/edit_phoneText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="25dp"
@@ -67,40 +67,6 @@
 
         </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:id="@+id/cancelECText"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:fontFamily="@font/baloo"
-        android:includeFontPadding="false"
-        android:textAllCaps="true"
-        android:text="CANCEL"
-        android:textColor="@color/fbutton_color_pumpkin"
-        android:textSize="@dimen/_14sdp"
-        android:padding="@dimen/_8sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPhoneNumber"
-        app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:id="@+id/editEC"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:fontFamily="@font/baloo"
-        android:includeFontPadding="false"
-        android:textAllCaps="true"
-        android:text="EDIT"
-        android:textColor="@color/fbutton_color_sun_flower"
-        android:textSize="@dimen/_14sdp"
-        android:padding="@dimen/_8sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPhoneNumber"
-        app:layout_constraintEnd_toStartOf="@id/cancelECText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

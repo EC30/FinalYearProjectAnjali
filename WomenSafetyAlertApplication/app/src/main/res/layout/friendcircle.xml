@@ -6,10 +6,11 @@
     android:layout_height="150dp"
     android:layout_margin="10dp"
     android:orientation="horizontal"
+    android:id="@+id/friendCircleLinearLayout"
     android:background="@drawable/coloredborder">
 
     <ImageView
-        android:id="@+id/friendImageView"
+        android:id="@+id/friendCircleImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
@@ -22,7 +23,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/friendName"
+            android:id="@+id/friendCircleName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"
@@ -33,7 +34,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/numberTextView"
+            android:id="@+id/friendCircleNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"

@@ -65,6 +65,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(HomeActivity.this, AddFriendActivity.class);
+                intent.putExtra("phone_logged",phone_logged2);
                 startActivity(intent);
             }
         });

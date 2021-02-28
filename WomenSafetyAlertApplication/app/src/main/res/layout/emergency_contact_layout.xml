@@ -29,23 +29,31 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/idTextView"
+                    android:id="@+id/ecNumber"
+                    android:layout_width="0dp"
+                    android:text=""
+                    android:visibility="invisible"
+                    android:layout_height="0dp"/>
+
+                <TextView
+                    android:id="@+id/ecCountryCodeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/baloo"
                     android:shadowColor="#000000"
-                    android:text="1"
+                    android:text="+977"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/ecNumberTextView"
+                    android:id="@+id/ecPhoneNumberTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="5dp"
+                    android:fontFamily="@font/baloo"
                     android:shadowColor="#000000"
                     android:text="228282828282828"
                     android:textSize="20sp" />
@@ -64,7 +72,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="20dp"
                     android:src="@drawable/ic_delete" />
 
 

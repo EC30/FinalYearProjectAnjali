@@ -201,6 +201,7 @@ public class OTPActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.contains("Inserted Successfully.")){
                     loadingBar.dismiss();
+
                     sendUserToMainActivity();
                 }else if(response.contains("Cannot Insert.")){
                     loadingBar.dismiss();
@@ -247,6 +248,14 @@ public class OTPActivity extends AppCompatActivity {
         SharedPreferences.Editor editor= preferences.edit();
         editor.putString("user_logged",phone);
         editor.commit();
+
+        DbHelper db=new DbHelper(OTPActivity.this);
+        db.delete_wsaa();
+        db.close();
+
+        VolleyHandlerEC vh=new VolleyHandlerEC();
+        vh.add_to_db(OTPActivity.this,"read","","",phone);
+
         Intent intent=new Intent(OTPActivity.this,HomeActivity.class);
         intent.putExtra("phone_logged",phone);
         startActivity(intent);

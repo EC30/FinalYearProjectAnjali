@@ -95,7 +95,7 @@
                             android:layout_marginTop="10dp"
                             android:text="Friends"
                             android:textSize="20sp"
-                            app:fontFamily="@font/aclonica" />
+                            app:fontFamily="@font/baloo" />
 
                         <ImageView
                             android:id="@+id/friendsImage"
@@ -129,7 +129,7 @@
                             android:layout_marginTop="7dp"
                             android:text="Add Emergency Contact"
                             android:textSize="20sp"
-                            app:fontFamily="@font/aclonica" />
+                            app:fontFamily="@font/baloo" />
                         <ImageView
                             android:id="@+id/ECImageView"
                             android:layout_width="75dp"
@@ -175,7 +175,7 @@
                             android:layout_marginTop="10dp"
                             android:text="Follow Me"
                             android:textSize="20sp"
-                            app:fontFamily="@font/aclonica" />
+                            app:fontFamily="@font/baloo" />
                         <ImageView
                             android:id="@+id/followMeImage"
                             android:layout_width="75dp"
@@ -207,7 +207,7 @@
                             android:layout_marginTop="10dp"
                             android:text="View Your Location"
                             android:textSize="20sp"
-                            app:fontFamily="@font/aclonica" />
+                            app:fontFamily="@font/baloo" />
                         <ImageView
                             android:id="@+id/train"
                             android:layout_width="75dp"
@@ -250,7 +250,7 @@
                             android:layout_marginTop="10dp"
                             android:text="Fake call"
                             android:textSize="20sp"
-                            app:fontFamily="@font/aclonica" />
+                            app:fontFamily="@font/baloo" />
                         <ImageView
                             android:id="@+id/fkImage"
                             android:layout_width="75dp"
@@ -282,7 +282,7 @@
                             android:textAlignment="center"
                             android:text="Choose sounds"
                             android:textSize="20sp"
-                            app:fontFamily="@font/aclonica" />
+                            app:fontFamily="@font/baloo" />
                         <ImageView
                             android:id="@+id/soundsImage"
                             android:layout_width="75dp"

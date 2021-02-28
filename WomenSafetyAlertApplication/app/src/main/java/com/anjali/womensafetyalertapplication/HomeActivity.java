@@ -31,6 +31,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_home);
         String phone_logged2=getIntent().getStringExtra("phone_logged");
 
+//        DbHelper db=new DbHelper(HomeActivity.this);
+//        db.delete_wsaa();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 
@@ -43,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         addEmergencyContactCardView=findViewById(R.id.addEmergencyContactCardView);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
         nav_view.bringToFront();
         viewLocation=findViewById(R.id.viewLocation);
         ActionBarDrawerToggle toogle=new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -76,6 +80,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(HomeActivity.this,AddECActivity.class);
+                intent.putExtra("my_phone",phone_logged2);
                 startActivity(intent);
             }
         });
@@ -109,7 +114,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.remove("user_logged");
                 editor.commit();
-                finish();
                 Intent intent2=new Intent(HomeActivity.this,MainActivity.class);
                 startActivity(intent2);
                 break;

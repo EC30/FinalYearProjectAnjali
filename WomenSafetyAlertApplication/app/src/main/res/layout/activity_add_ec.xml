@@ -30,6 +30,7 @@
         android:id="@+id/emergencyContactRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
         android:visibility="visible"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-16dp" />

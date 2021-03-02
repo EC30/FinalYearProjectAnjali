@@ -15,7 +15,7 @@ public class RequestActivity extends AppCompatActivity {
     private RecyclerView friendRequestRecyclerView;
     private Toolbar friendRequestToolbar;
     static ArrayList<String> friendnumberR, friendNameR;
-    private FriendRequestAdapter frAdapter;
+    static FriendRequestAdapter frAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

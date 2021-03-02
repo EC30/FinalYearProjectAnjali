@@ -1,6 +1,7 @@
 package com.anjali.womensafetyalertapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -44,7 +46,32 @@ public class FriendRequestSentAdapter extends RecyclerView.Adapter<FriendRequest
         holder.deleteSentRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder1=new AlertDialog.Builder(context);
+                builder1.setTitle("Confirmation !!");
+                builder1.setMessage("Do you want to delete "+holder.requestSentNumber.getText().toString()+"?");
+                builder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        VolleyHandlerFriends vhf=new VolleyHandlerFriends();
+                        String phone1="",phone2="";
 
+                        phone1=AddFriendActivity.phone_logged;
+                        phone2=AddFriendActivity.myrequestssent.get(position);
+
+                        vhf.process_friend_request(context,phone1,phone2,"pending","delete");
+
+                        if(!VolleyHandlerFriends.change_adapter_friends.equals("no")){
+                            friendNameS.remove(holder.getAdapterPosition());
+                            friendnumberS.remove(holder.getAdapterPosition());
+                            //friendImageC.remove(holder.getAdapterPosition());
+                            AddFriendActivity.myrequestssent.remove(position);
+                            SentRequestActivity.frsAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+                builder1.setNegativeButton("No", null);
+                builder1.setCancelable(false);
+                builder1.show();
             }
         });
     }

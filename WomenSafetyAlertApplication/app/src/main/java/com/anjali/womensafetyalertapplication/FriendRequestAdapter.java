@@ -2,6 +2,7 @@ package com.anjali.womensafetyalertapplication;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -43,13 +46,68 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         holder.confirmRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(AddFriendActivity.myfriends.size()>4) {
+                    Toast.makeText(context, "Friend Limit Exceeded. Max Friends Limit=5.", Toast.LENGTH_SHORT).show();
+                }else {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                    builder1.setTitle("Confirmation !!");
+                    builder1.setMessage("Are you sure to accept " + holder.friendNumberRequest.getText().toString() + " as your friend ?");
+                    builder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            VolleyHandlerFriends vhf = new VolleyHandlerFriends();
+                            String phone1 = "", phone2 = "";
 
+                            phone2 = AddFriendActivity.phone_logged;
+                            phone1 = AddFriendActivity.myrequestsreceived.get(position);
+
+                            vhf.process_friend_request(context, phone1, phone2, "pending", "confirm");
+                            //Toast.makeText(context, VolleyHandlerFriends.change_adapter_friends, Toast.LENGTH_SHORT).show();
+
+                            if(!VolleyHandlerFriends.change_adapter_friends.equals("no")) {
+                                friendNameR.remove(holder.getAdapterPosition());
+                                friendnumberR.remove(holder.getAdapterPosition());
+                                //friendImageC.remove(holder.getAdapterPosition());
+                                AddFriendActivity.myrequestsreceived.remove(position);
+                                AddFriendActivity.myfriends.add("1::" + holder.friendNumberRequest.getText().toString());
+
+                                RequestActivity.frAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+                    builder1.setNegativeButton("No", null);
+                    builder1.setCancelable(false);
+                    builder1.show();
+                }
             }
         });
+
         holder.deleteRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder1=new AlertDialog.Builder(context);
+                builder1.setTitle("Confirmation !!");
+                builder1.setMessage("Do you want to delete "+holder.friendNumberRequest.getText().toString()+"?");
+                builder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        VolleyHandlerFriends vhf=new VolleyHandlerFriends();
+                        String phone1="",phone2="";
 
+                        phone2=AddFriendActivity.phone_logged;
+                        phone1=AddFriendActivity.myrequestsreceived.get(position);
+
+                        vhf.process_friend_request(context,phone1,phone2,"pending","delete");
+                        friendNameR.remove(holder.getAdapterPosition());
+                        friendnumberR.remove(holder.getAdapterPosition());
+                        //friendImageC.remove(holder.getAdapterPosition());
+                        AddFriendActivity.myrequestsreceived.remove(position);
+                        RequestActivity.frAdapter.notifyDataSetChanged();
+                    }
+                });
+                builder1.setNegativeButton("No", null);
+                builder1.setCancelable(false);
+                builder1.show();
             }
         });
     }

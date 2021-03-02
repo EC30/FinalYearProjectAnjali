@@ -13,7 +13,7 @@ public class SentRequestActivity extends AppCompatActivity {
     private RecyclerView friendRequestSentRecyclerView;
     private Toolbar friendRequestSentToolbar;
     static ArrayList<String> friendnumberS, friendNameS;
-    private FriendRequestSentAdapter frsAdapter;
+    static FriendRequestSentAdapter frsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

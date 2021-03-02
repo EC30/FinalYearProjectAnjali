@@ -25,7 +25,7 @@ public class AddFriendActivity extends AppCompatActivity {
     private CardView myCircleCardView,viewFriendsLocationCardView,viewRequestCardView, addFriendsCardView,sentRequestCardView;
     static ArrayList<String> myfriends,myrequestsreceived,myrequestssent;
     ProgressDialog loadingBar;
-    String phone_logged;
+    static String phone_logged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +121,9 @@ public class AddFriendActivity extends AppCompatActivity {
 
                             if(individual_split[2].equals("verified")){
                                 if(!individual_split[0].equals(phone_logged_in)){
-                                    myfriends.add(individual_split[0]);
+                                    myfriends.add("1::"+individual_split[0]);
                                 }else if(!individual_split[1].equals(phone_logged_in)){
-                                    myfriends.add(individual_split[1]);
+                                    myfriends.add("2::"+individual_split[1]);
                                 }
                             }else if(individual_split[2].equals("pending")){
                                 if(individual_split[0].equals(phone_logged_in)){
@@ -139,10 +139,10 @@ public class AddFriendActivity extends AppCompatActivity {
                         Toast.makeText(AddFriendActivity.this, "No Friend Activity Found.", Toast.LENGTH_SHORT).show();
                     }
 
-                    Toast.makeText(AddFriendActivity.this, "Friend  :"+myfriends.get(0), Toast.LENGTH_SHORT).show();
-                    if(myrequestssent.size()>0){
-                    Toast.makeText(AddFriendActivity.this, "Sent Request:  "+myrequestssent.get(0), Toast.LENGTH_SHORT).show();}
-                    if(myrequestsreceived.size()>0){Toast.makeText(AddFriendActivity.this, "Received Request:  "+myrequestsreceived.get(0), Toast.LENGTH_SHORT).show();}
+//                    Toast.makeText(AddFriendActivity.this, "Friend  :"+myfriends.get(0), Toast.LENGTH_SHORT).show();
+//                    if(myrequestssent.size()>0){
+//                    Toast.makeText(AddFriendActivity.this, "Sent Request:  "+myrequestssent.get(0), Toast.LENGTH_SHORT).show();}
+//                    if(myrequestsreceived.size()>0){Toast.makeText(AddFriendActivity.this, "Received Request:  "+myrequestsreceived.get(0), Toast.LENGTH_SHORT).show();}
 
                 }else{
                     loadingBar.dismiss();

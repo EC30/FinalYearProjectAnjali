@@ -1,10 +1,15 @@
 package com.anjali.womensafetyalertapplication;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.provider.ContactsContract;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +22,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -37,6 +44,9 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
     Context context;
     ArrayList<String> number, ecCountryCode,ecnum;
     private ProgressDialog loadingBar;
+    private String phoneNo, message;
+
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
 
 
     public EmergencyContactAdater( Context context, ArrayList<String> number, ArrayList<String> ecCountryCode, ArrayList<String> ecnum) {
@@ -55,6 +65,47 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
         return new ViewHolder(view);
     }
 
+    protected void sendSMSMessage() {
+
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity)context,
+                    Manifest.permission.SEND_SMS)) {
+            } else {
+                ActivityCompat.requestPermissions((Activity) context,
+                        new String[]{Manifest.permission.SEND_SMS},
+                        MY_PERMISSIONS_REQUEST_SEND_SMS);
+            }
+        }else{
+            sendSMS();
+        }
+    }
+
+    public void sendSMS(){
+        SmsManager smsManager = SmsManager.getDefault();
+        String sent="SMS_SENT";
+        PendingIntent pi=PendingIntent.getBroadcast(context,MY_PERMISSIONS_REQUEST_SEND_SMS,new Intent(sent),0);
+        smsManager.sendTextMessage(phoneNo, null, message, pi, null);
+        //Toast.makeText(context, "SMS sent to "+phoneNo, Toast.LENGTH_LONG).show();
+    }
+
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_SEND_SMS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    sendSMS();
+                } else {
+                    Toast.makeText(context,
+                            "SMS faild, please try again.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        }
+
+    }
+
     @Override
     public void onBindViewHolder(@NonNull EmergencyContactAdater.ViewHolder holder, final int position) {
         holder.ecPhoneNumberTextView.setText(String.valueOf(number.get(position)));
@@ -64,7 +115,10 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
         holder.testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                phoneNo=ecCountryCode.get(position)+number.get(position);
+                message=AddECActivity.phone_logged2+" has added you as their emergency contact. Thank You";
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                sendSMSMessage();
             }
         });
 
@@ -136,6 +190,7 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                         ecCountryCode.remove(holder.getAdapterPosition());
                         ecnum.remove(holder.getAdapterPosition());
                         AddECActivity.econtacts.set(holder.getAdapterPosition(),"NULL-VAL");
+                        AddECActivity.ecAdapter.notifyDataSetChanged();
 
                         AddECActivity.ecAdapter.notifyDataSetChanged();
                         if (number.size() == 0) {

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MyFriendCircle extends AppCompatActivity {
     private RecyclerView friendCircleRecyclerView;
     private Toolbar friendCircleToolbar;
-    private FriendCircleAdapter fAdapter;
+    static FriendCircleAdapter fAdapter;
     static ArrayList<String> friendnumberC, friendNameC;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

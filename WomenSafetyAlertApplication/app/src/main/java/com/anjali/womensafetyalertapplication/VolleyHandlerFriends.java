@@ -12,14 +12,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VolleyHandlerEC extends AddECActivity {
-
-    public void add_to_db(Context context,String action, String new_contact,String contact_to_update,String phone_logged_in){
+public class VolleyHandlerFriends extends AddECActivity {
+static  String change_adapter_friends="";
+    public void process_friend_request(Context context,String phone1, String phone2,String status,String action){
         ProgressDialog loadingBar=new ProgressDialog(context);
 
         UrlClass myurl = new UrlClass();
@@ -30,33 +28,39 @@ public class VolleyHandlerEC extends AddECActivity {
         loadingBar.setMessage("Please wait");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
-        String postUrl = url+"emergencycontact.php";
+        String postUrl = url+"friendHandler.php";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.contains("Updated EC Successfully.")){
+                if(response.contains("Friend Request Accepted.")){
+                    change_adapter_friends="yes";
                     loadingBar.dismiss();
-                    Toast.makeText(context, "Process Successful", Toast.LENGTH_SHORT).show();
-                }else if(response.contains("Cannot Update EC")){
+                    Toast.makeText(context, "Friend Request Accepted", Toast.LENGTH_SHORT).show();
+
+                }else if(response.contains("Cannot Complete Request.")){
+                    change_adapter_friends="no";
                     loadingBar.dismiss();
-                    String error="* Some Internal Error Occured. Cannot Add Contact. Try Again Later.";
+                    String error="* Some Internal Error Occured. Cannot process request. Try Again Later.";
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                }else if(response.contains("read_value_wsaa_ec::")) {
+
+                }else if(response.contains("Cannot accept request. The friend whose request you are trying to accept already has 5 friends.")){
+                    change_adapter_friends="no";
                     loadingBar.dismiss();
-                    String[] ec_data=response.split("::");
-                    DbHelper db=new DbHelper(context);
-                    db.add_wsaa("EC1",ec_data[1]);
-                    //Toast.makeText(context, "EC1:"+ec_data[1], Toast.LENGTH_SHORT).show();
-                    db.add_wsaa("EC2",ec_data[2]);
-                    //Toast.makeText(context, "EC2:"+ec_data[2], Toast.LENGTH_SHORT).show();
-                    db.add_wsaa("EC3",ec_data[3]);
-                    //Toast.makeText(context, "EC3:"+ec_data[3], Toast.LENGTH_SHORT).show();
-                    db.close();
+                    Toast.makeText(context, "Cannot accept request. The friend whose request you are trying to accept already has 5 friends.", Toast.LENGTH_SHORT).show();
+
+                }
+                else if(response.contains("Deleted Successfully.")) {
+                    change_adapter_friends="yes";
+                    loadingBar.dismiss();
+                    Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+
                 }else{
-                        loadingBar.dismiss();
-                        String error="* Some Internal Error Occured. Try Again Later.";
-                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                    change_adapter_friends="no";
+                    loadingBar.dismiss();
+                    String error="* Some Internal Error Occured. Try Again Later.";
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -70,10 +74,10 @@ public class VolleyHandlerEC extends AddECActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("phone_logged_in", phone_logged_in);
+                params.put("phone1", phone1);
                 params.put("action", action);
-                params.put("contact_to_update", contact_to_update);
-                params.put("new_contact", new_contact);
+                params.put("phone2", phone2);
+                params.put("status", status);
                 return params;
             }
 

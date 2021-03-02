@@ -31,7 +31,6 @@ public class SentRequestActivity extends AppCompatActivity {
         friendRequestSentRecyclerView.setLayoutManager(new LinearLayoutManager(SentRequestActivity.this));
 
         for(int i=0;i<AddFriendActivity.myrequestssent.size();i++){
-            //Toast.makeText(this, AddFriendActivity.myrequestsreceived.get(i), Toast.LENGTH_SHORT).show();
             friendnumberS.add(AddFriendActivity.myrequestssent.get(i).toString());
             friendNameS.add(AddFriendActivity.myrequestssent.get(i).toString());
             frsAdapter.notifyDataSetChanged();

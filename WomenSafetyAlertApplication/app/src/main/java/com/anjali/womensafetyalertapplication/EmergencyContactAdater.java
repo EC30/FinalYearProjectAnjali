@@ -8,6 +8,7 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,11 +57,16 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
 
     @Override
     public void onBindViewHolder(@NonNull EmergencyContactAdater.ViewHolder holder, final int position) {
-        //this.position=position;
-//        holder.idTextView.setText(String.valueOf(getItemCount()));
         holder.ecPhoneNumberTextView.setText(String.valueOf(number.get(position)));
         holder.ecCountryCodeTextView.setText(String.valueOf(ecCountryCode.get(position)));
         holder.ecnumTextView.setText(String.valueOf(ecnum.get(position)));
+
+        holder.testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         holder.bt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +166,7 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
         CardView ecCardView;
         TextView ecCountryCodeTextView, ecPhoneNumberTextView,ecnumTextView;
         ImageView bt_edit, bt_delete;
+        Button testButton;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -169,58 +176,9 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
             ecnumTextView=itemView.findViewById(R.id.ecNumber);
             bt_edit=itemView.findViewById(R.id.bt_edit);
             bt_delete=itemView.findViewById(R.id.bt_delete);
+            testButton=itemView.findViewById(R.id.testButton);
         }
     }
 
-//    public void add_to_db2(String url, String action, String new_contact,String contact_to_update){
-//        loadingBar.setTitle("Adding Emergency Contact...");
-//        loadingBar.setMessage("Please wait");
-//        loadingBar.setCanceledOnTouchOutside(false);
-//        loadingBar.show();
-//        String postUrl = url+"emergencycontact.php";
-//        RequestQueue requestQueue = Volley.newRequestQueue(context);
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                if(response.contains("Updated EC Successfully.")){
-//                    loadingBar.dismiss();
-//                    Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
-//                }else if(response.contains("Cannot Update EC")){
-//                    loadingBar.dismiss();
-//                    String error="* Some Internal Error Occured. Cannot Add Contact. Try Again Later.";
-//                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-//                }else{
-//                    loadingBar.dismiss();
-//                    String error="* Some Internal Error Occured. Try Again Later.";
-//                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                //content.setText("Error : "+error);
-//                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("phone_logged_in", AddECActivity.phone_logged2);
-//                params.put("action", action);
-//                params.put("contact_to_update", contact_to_update);
-//                params.put("new_contact", new_contact);
-//                return params;
-//            }
-//
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("Content-Type", "application/x-www-form-urlencoded");
-//                //params.put("Cookie", cookie);
-//
-//                return params;
-//            }
-//        };
-//        requestQueue.add(stringRequest);
-//    }
+
 }

@@ -55,6 +55,11 @@ static  String change_adapter_friends="";
                     loadingBar.dismiss();
                     Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
 
+                }else if(response.contains("Added Successfully.")) {
+                    change_adapter_friends="yes";
+                    loadingBar.dismiss();
+                    Toast.makeText(context, "Friend Request Sent.", Toast.LENGTH_SHORT).show();
+
                 }else{
                     change_adapter_friends="no";
                     loadingBar.dismiss();

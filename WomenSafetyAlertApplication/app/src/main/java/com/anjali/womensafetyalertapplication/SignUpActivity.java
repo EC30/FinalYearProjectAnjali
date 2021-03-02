@@ -157,12 +157,14 @@ public class SignUpActivity extends AppCompatActivity {
                     loadingBar.show();
                     initiateOTP(phone2);
                 }else{
+                    loadingBar.dismiss();
                     textError.setText("* Some Internal Error Occured. Try Again Later.");
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                loadingBar.dismiss();
                 Toast.makeText(SignUpActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {

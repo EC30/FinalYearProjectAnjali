@@ -45,7 +45,12 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
         holder.addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                VolleyHandlerFriends vhf=new VolleyHandlerFriends();
+                vhf.process_friend_request(context,AddFriendActivity.phone_logged,holder.addFriendNumber.getText().toString(),"pending","insert");
+                AddFriendActivity.myrequestssent.add(holder.addFriendNumber.getText().toString());
+                friendnumberSearch.remove(holder.getAdapterPosition());
+                friendNameSearch.remove(holder.getAdapterPosition());
+                SearchFriendActivity.searchFriendAdapter.notifyDataSetChanged();
             }
         });
     }

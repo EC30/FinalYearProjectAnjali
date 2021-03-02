@@ -17,41 +17,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Do not enter country code while searching. Enter only number."
-        android:textSize="18dp"
-        android:id="@+id/alertTextView"
-        android:padding="@dimen/_8sdp"
-        android:layout_below="@id/searchFriendToolbar"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Do not enter country code while searching. Enter only number."-->
+<!--        android:textSize="18dp"-->
+<!--        android:id="@+id/alertTextView"-->
+<!--        android:padding="@dimen/_8sdp"-->
+<!--        android:layout_below="@id/searchFriendToolbar"/>-->
 
     <LinearLayout
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/alertTextView"
-        android:layout_marginLeft="20dp"
+        android:layout_below="@id/searchFriendToolbar"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_baseline_search_24" />
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/countryPickerSearch"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:ccp_countryPreference="NP,IN,BD"
+            app:ccp_defaultNameCode="NP"/>
+
+
 
         <EditText
             android:id="@+id/searchEditText"
-            android:layout_width="270dp"
+            android:layout_width="200dp"
             android:layout_height="40dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:hint="search friend" />
+            android:hint="Search Number" />
 
 
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_baseline_search_24" />-->
         <TextView
             android:id="@+id/searchFriendsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:textSize="15dp"
             android:textColor="@color/black"
             android:text="Search" />

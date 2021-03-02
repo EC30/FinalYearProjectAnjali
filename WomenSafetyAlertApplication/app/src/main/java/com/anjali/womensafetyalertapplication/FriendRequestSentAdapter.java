@@ -60,13 +60,13 @@ public class FriendRequestSentAdapter extends RecyclerView.Adapter<FriendRequest
 
                         vhf.process_friend_request(context,phone1,phone2,"pending","delete");
 
-                        if(!VolleyHandlerFriends.change_adapter_friends.equals("no")){
+                        //if(!VolleyHandlerFriends.change_adapter_friends.equals("no")){
                             friendNameS.remove(holder.getAdapterPosition());
                             friendnumberS.remove(holder.getAdapterPosition());
                             //friendImageC.remove(holder.getAdapterPosition());
                             AddFriendActivity.myrequestssent.remove(position);
                             SentRequestActivity.frsAdapter.notifyDataSetChanged();
-                        }
+                        //}
                     }
                 });
                 builder1.setNegativeButton("No", null);

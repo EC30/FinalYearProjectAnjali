@@ -11,11 +11,11 @@
 
     <ImageView
         android:id="@+id/friendCircleImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:srcCompat="@drawable/user_image"
         android:contentDescription="@string/nav_header_desc"
-        android:layout_margin="10dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:layout_margin="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

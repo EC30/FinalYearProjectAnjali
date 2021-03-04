@@ -256,7 +256,7 @@ public class OTPActivity extends AppCompatActivity {
         VolleyHandlerEC vh=new VolleyHandlerEC();
         vh.add_to_db(OTPActivity.this,"read","","",phone);
 
-        Intent intent=new Intent(OTPActivity.this,HomeActivity.class);
+        Intent intent=new Intent(OTPActivity.this,PermissionActivity.class);
         intent.putExtra("phone_logged",phone);
         startActivity(intent);
     }

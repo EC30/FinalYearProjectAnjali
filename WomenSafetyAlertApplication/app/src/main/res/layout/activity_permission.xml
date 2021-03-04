@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PermissionActivity"
+    android:id="@+id/activity_main">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:layout_margin="20dp"
+            android:id="@+id/pTextView"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloo"
+            android:text="@string/permission"/>
+
+        <Button
+            android:id="@+id/LPButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pTextView"
+            android:layout_margin="20dp"
+            android:textSize="20dp"
+            android:text="Give Location permissions" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:layout_margin="20dp"
+            android:id="@+id/sTextView"
+            android:layout_below="@+id/LPButton"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloo"
+            android:text="@string/smspermission"/>
+
+
+
+        <Button
+            android:id="@+id/SPButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"
+            android:layout_margin="20dp"
+            android:layout_below="@+id/sTextView"
+            android:text="Give SMS permissions" />
+
+
+
+
+</RelativeLayout>

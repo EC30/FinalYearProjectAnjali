@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         textErrorMain = findViewById(R.id.textErrorMain);
         loadingBar = new ProgressDialog(this);
         textLogin = findViewById(R.id.textLogin);
-        startService(new Intent(MainActivity.this, GetBackgroundLocation.class));
+        //startService(new Intent(MainActivity.this, GetBackgroundLocation.class));
 
 //        textLogo.findViewById(R.id.textLogo);
 //        textLogo.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         textLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                Intent intent = new Intent(MainActivity.this, PermissionActivity.class);
                 startActivity(intent);
             }
         });

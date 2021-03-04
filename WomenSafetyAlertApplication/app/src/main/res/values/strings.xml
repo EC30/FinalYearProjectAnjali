@@ -70,4 +70,12 @@ In the second move, aim for your attacker’s throat with a fist or pointed fing
         <item>What you do here largely depends on their body language and your position relative to them. The main rule is: attack the most vulnerable position. If their arms are up, attack the armpits. If one of your arms is low and free, us it to attack the neck or jaw. If you’re pinned, attack with your head.</item>
 
     </string-array>
+
+
+    <string name="permission"> Background Location is required for the core functionality of the program. Please go to permission of app from the setting button here and select ALLOW ALL THE TIME for location access.</string>
+    <string name="smspermission"> SMS permission is required for the core functionality of the program. It is required for sending sms to your emergency contacts during emergency. Please go to permission of app below and select ALLOW ALL THE TIME.</string>
+
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
+    <string name="settings">Settings</string>
 </resources>

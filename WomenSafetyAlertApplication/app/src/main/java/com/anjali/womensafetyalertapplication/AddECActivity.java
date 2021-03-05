@@ -169,6 +169,7 @@ public class AddECActivity extends AppCompatActivity {
                         ecnum.add(edataof.get(new_index));
                         ecCountryCode.add(cc);
                         emergencynumber.add(emergencyContact);
+                        HomeActivity.eccontacts_home.add(cc+emergencyContact);
                         ecAdapter.notifyDataSetChanged();
                         emergencyContactRecyclerView.setVisibility(View.VISIBLE);
                         empty.setVisibility(View.INVISIBLE);

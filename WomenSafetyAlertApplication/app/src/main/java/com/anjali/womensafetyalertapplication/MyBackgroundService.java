@@ -18,6 +18,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,6 +52,7 @@ public class MyBackgroundService extends Service {
     private LocationCallback locationCallback;
     private Handler mServiceHandler;
     private Location mLocation;
+    static boolean isSMSsent;
 
     public MyBackgroundService(){
 
@@ -66,10 +68,13 @@ public class MyBackgroundService extends Service {
                 onNewLocation(locationResult.getLastLocation());
             }
         };
-        
+
+        isSMSsent=false;
+
         createLocationRequest();
         getLastLocation();
 
+        Toast.makeText(this, "Background Service Created", Toast.LENGTH_SHORT).show();
         HandlerThread handlerThread=new HandlerThread("Women Safety Alert App");
         handlerThread.start();
         mServiceHandler=new Handler(handlerThread.getLooper());

@@ -148,7 +148,7 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                                 String old_num=holder.ecCountryCodeTextView.getText().toString()+holder.ecPhoneNumberTextView.getText().toString();
 
                                 String new_num=editCountryPicker.getSelectedCountryCodeWithPlus().toString()+"@@"+edit_phoneText.getText().toString();
-                                Toast.makeText(context, holder.ecnumTextView.getText().toString(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, holder.ecnumTextView.getText().toString(), Toast.LENGTH_SHORT).show();
 
                                 VolleyHandlerEC vh=new VolleyHandlerEC();
                                 vh.add_to_db(context,"update",new_num,holder.ecnumTextView.getText().toString(),AddECActivity.phone_logged2);
@@ -159,7 +159,16 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                                 db.close();
 
                                 number.set(holder.getAdapterPosition(),edit_phoneText.getText().toString());
+
+
+
                                 ecCountryCode.set(holder.getAdapterPosition(),editCountryPicker.getSelectedCountryCodeWithPlus().toString());
+
+                                for(int j=0;j<HomeActivity.eccontacts_home.size();j++){
+                                    if(old_num.equals(HomeActivity.eccontacts_home.get(j))){
+                                        HomeActivity.eccontacts_home.set(j,editCountryPicker.getSelectedCountryCodeWithPlus().toString()+edit_phoneText.getText().toString());
+                                    }
+                                }
 
                                 AddECActivity.ecAdapter.notifyDataSetChanged();
                             }
@@ -177,7 +186,7 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                 builder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        String num_to_del=holder.ecCountryCodeTextView.getText().toString()+holder.ecPhoneNumberTextView.getText().toString();
                         VolleyHandlerEC vh=new VolleyHandlerEC();
                         vh.add_to_db(context,"update","NULL-VAL",holder.ecnumTextView.getText().toString(),AddECActivity.phone_logged2);
 
@@ -192,6 +201,11 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                         AddECActivity.econtacts.set(holder.getAdapterPosition(),"NULL-VAL");
                         AddECActivity.ecAdapter.notifyDataSetChanged();
 
+                        for(int j=0;j<HomeActivity.eccontacts_home.size();j++){
+                            if(num_to_del.equals(HomeActivity.eccontacts_home.get(j))){
+                                HomeActivity.eccontacts_home.remove(j);
+                            }
+                        }
                         AddECActivity.ecAdapter.notifyDataSetChanged();
                         if (number.size() == 0) {
                             AddECActivity.emergencyContactRecyclerView.setVisibility(View.INVISIBLE);

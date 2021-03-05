@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
         if (preferences.contains("user_logged")) {
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            intent.putExtra("phone_logged",preferences.getString("user_logged",""));
+            Intent intent = new Intent(MainActivity.this, PermissionActivity.class);
+            intent.putExtra("phone_logged_main",preferences.getString("user_logged",""));
             startActivity(intent);
             return;
         }

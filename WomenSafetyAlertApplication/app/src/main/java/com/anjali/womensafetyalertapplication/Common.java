@@ -9,13 +9,15 @@ import java.util.Date;
 
 public class Common {
     public static final String KEY_REQUESTING_LOCATION_UPDATES = "LocationUpdateEnable";
+    public static String LastLocation="";
 
     public static String getLocationText(Location mLocation) {
-        return mLocation == null ? "UnKnown Location" : new StringBuilder()
+        LastLocation= mLocation == null ? "UnKnown Location" : new StringBuilder()
                 .append(mLocation.getLatitude())
                 .append("/")
                 .append(mLocation.getLongitude())
                 .toString();
+        return LastLocation;
     }
 
     public static CharSequence getLocationTitle(MyBackgroundService myBackgroundService) {

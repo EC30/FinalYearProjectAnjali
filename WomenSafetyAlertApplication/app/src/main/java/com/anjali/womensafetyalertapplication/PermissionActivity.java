@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -35,27 +36,11 @@ public class PermissionActivity extends AppCompatActivity {
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
     private int REQUEST_PERMISSIONS_REQUEST_CODE=123;
     private int SMS_REQUEST_PERMISSIONS_REQUEST_CODE=1234;
-    private String abc;
+    private String abcdefghij;
 
     private static final String TAG = PermissionActivity.class.getSimpleName();
+    private ServiceConnection mServiceConnection=null;
 
-    private final ServiceConnection mServiceConnection=new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder iBinder) {
-            MyBackgroundService.LocalBinder binder=(MyBackgroundService.LocalBinder)iBinder;
-            mService=binder.getService();
-            mService.requestLocationUpdates();
-            mBound=true;
-            Toast.makeText(mService, "Location Updates Started", Toast.LENGTH_SHORT).show();
-            checkBothGranted();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mService=null;
-            mBound=false;
-        }
-    };
 
 
     @Override
@@ -65,9 +50,27 @@ public class PermissionActivity extends AppCompatActivity {
 
         SMSPButton=findViewById(R.id.SPButton);
         LocPButton=findViewById(R.id.LPButton);
-        abc=getIntent().getStringExtra("Phone_logged");
+        abcdefghij=getIntent().getStringExtra("phone_logged_main");
 
-        checkBothGranted();
+        mServiceConnection=new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder iBinder) {
+                MyBackgroundService.LocalBinder binder=(MyBackgroundService.LocalBinder)iBinder;
+                mService=binder.getService();
+                mService.requestLocationUpdates();
+                mBound=true;
+                Toast.makeText(mService, "Location Updates Started", Toast.LENGTH_SHORT).show();
+                checkBothGranted();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                mService=null;
+                mBound=false;
+            }
+        };
+
+
 
         if(checkLocationPermissions()){
             LocPButton.setText("Location Permission Granted");
@@ -84,10 +87,8 @@ public class PermissionActivity extends AppCompatActivity {
             SMSPButton.setText("SEND SMS PERMISSSION GRANTED");
             SMSPButton.setBackgroundColor(Color.GREEN);
             SMSPButton.setEnabled(false);
-
+            checkBothGranted();
         }
-
-
 
         SMSPButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +99,7 @@ public class PermissionActivity extends AppCompatActivity {
                     SMSPButton.setText("SEND SMS PERMISSSION GRANTED");
                     SMSPButton.setBackgroundColor(Color.GREEN);
                     SMSPButton.setEnabled(false);
-
+                    checkBothGranted();
                 }
             }
         });
@@ -116,15 +117,25 @@ public class PermissionActivity extends AppCompatActivity {
                     bindService(new Intent(PermissionActivity.this, MyBackgroundService.class),
                             mServiceConnection,
                             Context.BIND_AUTO_CREATE);
+
                 }
             }
         });
     }
 
     private void checkBothGranted(){
+
+//        if(checkSMSPermission()){
+//            Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        if(checkLocationPermissions()){
+//            Toast.makeText(this, "here loc", Toast.LENGTH_SHORT).show();
+//        }
+
         if(checkSMSPermission() && checkLocationPermissions()){
             Intent intent= new Intent(PermissionActivity.this,HomeActivity.class);
-            intent.putExtra("phone_logged",abc);
+            intent.putExtra("phone_logged_main",abcdefghij);
             startActivity(intent);
         }
     }
@@ -142,8 +153,11 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     private boolean checkLocationPermissions() {
-        int permissionState = ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        int permissionState=PackageManager.PERMISSION_GRANTED;
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q) {
+            permissionState = ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        }
         int permissionState2 = ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION);
         int permissionState3 = ActivityCompat.checkSelfPermission(this,
@@ -158,9 +172,12 @@ public class PermissionActivity extends AppCompatActivity {
                 ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.ACCESS_COARSE_LOCATION);
 
-        boolean shouldProvideRationale2 =
-                ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        boolean shouldProvideRationale2=false;
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q) {
+            shouldProvideRationale2 =
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        }
 
 
         if (shouldProvideRationale || shouldProvideRationale2) {
@@ -183,9 +200,15 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     private void startLocationPermissionRequest() {
-        ActivityCompat.requestPermissions(PermissionActivity.this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_BACKGROUND_LOCATION},
-                REQUEST_PERMISSIONS_REQUEST_CODE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q) {
+            ActivityCompat.requestPermissions(PermissionActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION},
+                    REQUEST_PERMISSIONS_REQUEST_CODE);
+        }else{
+            ActivityCompat.requestPermissions(PermissionActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -204,6 +227,7 @@ public class PermissionActivity extends AppCompatActivity {
                 bindService(new Intent(PermissionActivity.this, MyBackgroundService.class),
                         mServiceConnection,
                         Context.BIND_AUTO_CREATE);
+                checkBothGranted();
             } else {
                 // Permission denied.
                 Snackbar.make(

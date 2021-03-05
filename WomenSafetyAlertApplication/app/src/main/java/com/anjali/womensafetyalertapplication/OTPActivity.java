@@ -257,7 +257,7 @@ public class OTPActivity extends AppCompatActivity {
         vh.add_to_db(OTPActivity.this,"read","","",phone);
 
         Intent intent=new Intent(OTPActivity.this,PermissionActivity.class);
-        intent.putExtra("phone_logged",phone);
+        intent.putExtra("phone_logged_main",phone);
         startActivity(intent);
     }
 }

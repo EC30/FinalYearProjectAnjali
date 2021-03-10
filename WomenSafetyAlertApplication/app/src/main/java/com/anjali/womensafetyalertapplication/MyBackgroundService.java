@@ -7,8 +7,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.TaskStackBuilder;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Binder;
@@ -74,7 +76,7 @@ public class MyBackgroundService extends Service {
         createLocationRequest();
         getLastLocation();
 
-        Toast.makeText(this, "Background Service Created", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Background Service Created", Toast.LENGTH_SHORT).show();
         HandlerThread handlerThread=new HandlerThread("Women Safety Alert App");
         handlerThread.start();
         mServiceHandler=new Handler(handlerThread.getLooper());
@@ -87,6 +89,11 @@ public class MyBackgroundService extends Service {
             mNotificationManager.createNotificationChannel(mChannel);
         }
 
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_USER_PRESENT);
+        final BroadcastReceiver mReceiver = new ScreenReceiver();
+        registerReceiver(mReceiver, filter);
     }
 
     @Override

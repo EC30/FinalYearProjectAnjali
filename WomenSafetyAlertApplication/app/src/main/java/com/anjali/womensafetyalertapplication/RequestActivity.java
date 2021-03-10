@@ -5,7 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,7 +27,13 @@ public class RequestActivity extends AppCompatActivity {
         friendRequestRecyclerView=findViewById(R.id.friendRequestRecyclerView);
         friendRequestToolbar=findViewById(R.id.friendRequestToolbar);
         setSupportActionBar(friendRequestToolbar);
-        getSupportActionBar().setTitle("My Request");
+        friendRequestToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(RequestActivity.this,AddFriendActivity.class);
+                startActivity(in);
+            }
+        });
 
         friendNameR=new ArrayList<>();
         friendnumberR=new ArrayList<>();

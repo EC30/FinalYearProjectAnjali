@@ -11,12 +11,14 @@ $gender=$_POST['gender_post'];
 
 $query="INSERT INTO ".$table_name." (fullname, phone, password, gender) VALUES ('$fullname', '$phone', '$passwd', '$gender')";
 $query2="INSERT INTO ".$ec_table_name." (phone,EC1,EC2,EC3) VALUES ('$phone','NULL-VAL','NULL-VAL','NULL-VAL')";
+$query4="INSERT INTO ".$loc_table_name." (user_phone,lat,lon) VALUES ('$phone','unknown','unknown')";
 
 //echo $query;
 $query1=mysqli_query($my_connection_server,$query);
 $query3=mysqli_query($my_connection_server,$query2);
+$query5=mysqli_query($my_connection_server,$query4);
 
-if($query1 and  $query3){
+if($query1 and  $query3 and $query5){
 	echo "Inserted Successfully.";
 }else{
 	echo "Cannot Insert.";

@@ -2,6 +2,7 @@ package com.anjali.womensafetyalertapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -42,6 +44,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
+import io.michaelrocks.libphonenumber.android.Phonenumber;
+
 public class AddECActivity extends AppCompatActivity {
     static FloatingActionButton floatingButton;
     static TextView empty;
@@ -60,7 +65,20 @@ public class AddECActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ec);
-        phone_logged2=getIntent().getStringExtra("my_phone");
+
+        Toolbar ectoolbar=findViewById(R.id.ectoolbar);
+        setSupportActionBar(ectoolbar);
+        ectoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AddECActivity.this,HomeActivity.class);
+                intent.putExtra("phone_logged_main",HomeActivity.phone_logged_home);
+                intent.putExtra("fullname_logged_main",HomeActivity.fullname_logged_home);
+                startActivity(intent);
+            }
+        });
+
+        phone_logged2=HomeActivity.phone_logged_home;
         //Toast.makeText(this, phone_logged2, Toast.LENGTH_SHORT).show();
 
         floatingButton=findViewById(R.id.floatingButton);
@@ -150,38 +168,54 @@ public class AddECActivity extends AppCompatActivity {
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String cc=countryCode.getSelectedCountryCodeWithPlus().toString();
+                        String cc = countryCode.getSelectedCountryCodeWithPlus().toString();
                         String emergencyContact = input_emergencyphoneText.getText().toString();
 
                         int new_index = econtacts.indexOf("NULL-VAL");
                         //Toast.makeText(AddECActivity.this, String.valueOf(new_index), Toast.LENGTH_SHORT).show();
 
                         //new_index+=1;
+                        PhoneNumberUtil pu=PhoneNumberUtil.createInstance(AddECActivity.this);
+                        Phonenumber.PhoneNumber num=new Phonenumber.PhoneNumber();
+                        num.setCountryCode(Integer.valueOf(cc));
+                        num.setNationalNumber(Long.valueOf(emergencyContact));
 
-                        VolleyHandlerEC vh = new VolleyHandlerEC();
-                        vh.add_to_db(AddECActivity.this, "update", cc + "@@" + emergencyContact, edataof.get(new_index),phone_logged2);
+                        if (phone_logged2.equals(cc + emergencyContact)) {
+                            Toast.makeText(AddECActivity.this, "You cannot add yourself as an emergency contact", Toast.LENGTH_SHORT).show();
+                        } else if (econtacts.contains(cc + "@@" + emergencyContact)) {
+                            Toast.makeText(AddECActivity.this, "Emergency contacts already added.", Toast.LENGTH_SHORT).show();
+                        } else if(!pu.isValidNumber(num)){
+                            Toast.makeText(AddECActivity.this, "Invalid Number", Toast.LENGTH_SHORT).show();
+                        } else{
 
-                        DbHelper db = new DbHelper(AddECActivity.this);
-                        db.update_wsaa(edataof.get(new_index), cc + "@@" + emergencyContact);
-                        econtacts.set(new_index, cc + "@@" + emergencyContact);
-                        db.close();
 
-                        ecnum.add(edataof.get(new_index));
-                        ecCountryCode.add(cc);
-                        emergencynumber.add(emergencyContact);
-                        HomeActivity.eccontacts_home.add(cc+emergencyContact);
-                        ecAdapter.notifyDataSetChanged();
-                        emergencyContactRecyclerView.setVisibility(View.VISIBLE);
-                        empty.setVisibility(View.INVISIBLE);
-                        if (emergencynumber.size() == 3) {
-                            floatingButton.setVisibility(View.INVISIBLE);
-                        } else {
-                            floatingButton.setVisibility(View.VISIBLE);
+                            VolleyHandlerEC vh = new VolleyHandlerEC();
+                            vh.add_to_db(AddECActivity.this, "update", cc + "@@" + emergencyContact, edataof.get(new_index), phone_logged2);
+
+                            DbHelper db = new DbHelper(AddECActivity.this);
+                            db.update_wsaa(edataof.get(new_index), cc + "@@" + emergencyContact);
+                            econtacts.set(new_index, cc + "@@" + emergencyContact);
+                            db.close();
+
+                            ecnum.add(edataof.get(new_index));
+                            ecCountryCode.add(cc);
+                            emergencynumber.add(emergencyContact);
+                            HomeActivity.eccontacts_home.add(cc + emergencyContact);
+                            ecAdapter.notifyDataSetChanged();
+                            emergencyContactRecyclerView.setVisibility(View.VISIBLE);
+                            empty.setVisibility(View.INVISIBLE);
+                            if (emergencynumber.size() == 3) {
+                                floatingButton.setVisibility(View.INVISIBLE);
+                            } else {
+                                floatingButton.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
 
                 });
         builder.show();
+
+
     }
 
 //    public void add_to_db(String url, String action, String new_contact,String contact_to_update){

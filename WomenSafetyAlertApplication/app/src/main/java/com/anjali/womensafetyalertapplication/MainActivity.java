@@ -1,14 +1,18 @@
 package com.anjali.womensafetyalertapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,15 +41,17 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     private SharedPreferences preferences;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
-        if (preferences.contains("user_logged")) {
+        if (preferences.contains("user_logged") && preferences.contains("fullname_logged_in")) {
             Intent intent = new Intent(MainActivity.this, PermissionActivity.class);
             intent.putExtra("phone_logged_main",preferences.getString("user_logged",""));
+            intent.putExtra("fullname_logged_main",preferences.getString("fullname_logged_in",""));
             startActivity(intent);
             return;
         }
@@ -58,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         textErrorMain = findViewById(R.id.textErrorMain);
         loadingBar = new ProgressDialog(this);
         textLogin = findViewById(R.id.textLogin);
+
+        //CheckGpsStatus();
         //startService(new Intent(MainActivity.this, GetBackgroundLocation.class));
 
 //        textLogo.findViewById(R.id.textLogo);
@@ -68,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
 
         textLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +123,10 @@ public class MainActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             if (response.contains("Logged in Successfully.")) {
                                 loadingBar.dismiss();
+                                String[] splitted=response.split("@@@");
                                 Intent intent = new Intent(MainActivity.this, OTPActivity.class);
                                 intent.putExtra("phone_extra", phoneLogin);
+                                intent.putExtra("fullname_logged",splitted[1]);
                                 intent.putExtra("from", "login");
                                 startActivity(intent);
                             } else if (response.contains("Cannot Login. Username or password incorrect")) {
@@ -157,4 +168,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

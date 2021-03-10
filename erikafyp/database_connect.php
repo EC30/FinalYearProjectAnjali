@@ -7,6 +7,7 @@ $database_name='wsdb';
 $table_name="registration";
 $ec_table_name="emergencycontact";
 $fr_table_name="friends";
+$loc_table_name="my_location";
 
 $my_connection_server=mysqli_connect($server_name,$server_user_name,$server_password) or die("Cannot Connect To Server");
 
@@ -32,12 +33,16 @@ $table2="CREATE TABLE IF NOT EXISTS $ec_table_name (phone VARCHAR(20) NOT NULL, 
 
 $table3="CREATE TABLE IF NOT EXISTS $fr_table_name (user_phone1 VARCHAR(20) NOT NULL, user_phone2 VARCHAR(20) NOT NULL,status VARCHAR(20) NOT NULL)";
 
+$table4="CREATE TABLE IF NOT EXISTS $loc_table_name (user_phone VARCHAR(20) NOT NULL, lat VARCHAR(20) NOT NULL,lon VARCHAR(20) NOT NULL)";
+
 
 $table_query=mysqli_query($my_connection_server,$table1);
 $table_query2=mysqli_query($my_connection_server,$table2);
 $table_query3=mysqli_query($my_connection_server,$table3);
+$table_query4=mysqli_query($my_connection_server,$table4);
 
-if($table_query and $table_query2 and $table_query3){
+
+if($table_query and $table_query2 and $table_query3 and $table_query4){
 	//echo "Table Created Succesfully.<br>";
 }else{
 	//echo "Cannot create Table.<br>";

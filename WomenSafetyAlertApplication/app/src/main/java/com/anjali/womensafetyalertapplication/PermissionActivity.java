@@ -2,6 +2,7 @@ package com.anjali.womensafetyalertapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -32,11 +33,12 @@ import org.greenrobot.eventbus.ThreadMode;
 public class PermissionActivity extends AppCompatActivity {
     private Button SMSPButton, LocPButton;
     MyBackgroundService mService=null;
+    private Toolbar permissionToolbar;
     boolean mBound=false;
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
     private int REQUEST_PERMISSIONS_REQUEST_CODE=123;
     private int SMS_REQUEST_PERMISSIONS_REQUEST_CODE=1234;
-    private String abcdefghij;
+    private String abcdefghij,klmnop;
 
     private static final String TAG = PermissionActivity.class.getSimpleName();
     private ServiceConnection mServiceConnection=null;
@@ -50,7 +52,10 @@ public class PermissionActivity extends AppCompatActivity {
 
         SMSPButton=findViewById(R.id.SPButton);
         LocPButton=findViewById(R.id.LPButton);
+        permissionToolbar=findViewById(R.id.permissionToolbar);
+        setSupportActionBar(permissionToolbar);
         abcdefghij=getIntent().getStringExtra("phone_logged_main");
+        klmnop=getIntent().getStringExtra("fullname_logged_main");
 
         mServiceConnection=new ServiceConnection() {
             @Override
@@ -70,13 +75,10 @@ public class PermissionActivity extends AppCompatActivity {
             }
         };
 
-
-
         if(checkLocationPermissions()){
             LocPButton.setText("Location Permission Granted");
             LocPButton.setBackgroundColor(Color.GREEN);
             LocPButton.setEnabled(false);
-            //setButtonState(Common.requestingLocationUpdates(MainActivity.this));
             bindService(new Intent(PermissionActivity.this, MyBackgroundService.class),
                     mServiceConnection,
                     Context.BIND_AUTO_CREATE);
@@ -85,9 +87,9 @@ public class PermissionActivity extends AppCompatActivity {
 
         if(checkSMSPermission()){
             SMSPButton.setText("SEND SMS PERMISSSION GRANTED");
-            SMSPButton.setBackgroundColor(Color.GREEN);
+            //SMSPButton.setBackgroundColor(Color.GREEN);
+            SMSPButton.setBackground(getApplicationContext().getResources().getDrawable(R.drawable.buttoncolorchange));
             SMSPButton.setEnabled(false);
-            checkBothGranted();
         }
 
         SMSPButton.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +113,8 @@ public class PermissionActivity extends AppCompatActivity {
                     requestPermissions();
                 } else {
                     LocPButton.setText("Location Permission Granted");
-                    LocPButton.setBackgroundColor(Color.GREEN);
+                   // LocPButton.setBackgroundColor(Color.GREEN);
+                    LocPButton.setBackground(getApplicationContext().getResources().getDrawable(R.drawable.buttoncolorchange));
                     LocPButton.setEnabled(false);
                     //setButtonState(Common.requestingLocationUpdates(MainActivity.this));
                     bindService(new Intent(PermissionActivity.this, MyBackgroundService.class),
@@ -124,18 +127,10 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     private void checkBothGranted(){
-
-//        if(checkSMSPermission()){
-//            Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        if(checkLocationPermissions()){
-//            Toast.makeText(this, "here loc", Toast.LENGTH_SHORT).show();
-//        }
-
         if(checkSMSPermission() && checkLocationPermissions()){
             Intent intent= new Intent(PermissionActivity.this,HomeActivity.class);
             intent.putExtra("phone_logged_main",abcdefghij);
+            intent.putExtra("fullname_logged_main",klmnop);
             startActivity(intent);
         }
     }
@@ -304,35 +299,8 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
     protected void onResume() {
-        if(checkLocationPermissions()){
-            LocPButton.setText("Location Permission Granted");
-            LocPButton.setBackgroundColor(Color.GREEN);
-            LocPButton.setEnabled(false);
-            //setButtonState(Common.requestingLocationUpdates(MainActivity.this));
-            bindService(new Intent(PermissionActivity.this, MyBackgroundService.class),
-                    mServiceConnection,
-                    Context.BIND_AUTO_CREATE);
-
-        }
-
-        if(checkSMSPermission()){
-            SMSPButton.setText("SEND SMS PERMISSSION GRANTED");
-            SMSPButton.setBackgroundColor(Color.GREEN);
-            SMSPButton.setEnabled(false);
-
-        }
-
-        checkBothGranted();
         super.onResume();
     }
-
-//    @Override
-//    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//        if (key.equals(Common.KEY_REQUESTING_LOCATION_UPDATES)){
-////            setButtonState(sharedPreferences.getBoolean(Common.KEY_REQUESTING_LOCATION_UPDATES,false));
-//        }
-//
-//    }
 
     @Subscribe(sticky =true,threadMode = ThreadMode.MAIN)
     public void onListenLocation(SendLocationToActivity event){

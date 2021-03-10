@@ -1,11 +1,15 @@
 package com.anjali.womensafetyalertapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,12 +36,24 @@ public class AddFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
 
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AddFriendActivity.this,HomeActivity.class);
+                intent.putExtra("phone_logged_main",HomeActivity.phone_logged_home);
+                intent.putExtra("fullname_logged_main",HomeActivity.fullname_logged_home);
+                startActivity(intent);
+            }
+        });
+
         viewFriendsLocationCardView=findViewById(R.id.viewFriendsLocationCardView);
         myCircleCardView=findViewById(R.id.myCircleCardView);
         viewRequestCardView=findViewById(R.id.viewRequestCardView);
         addFriendsCardView=findViewById(R.id.addFriendsCardView);
         sentRequestCardView=findViewById(R.id.sentRequestCardView);
-        phone_logged=getIntent().getStringExtra("phone_logged");
+        phone_logged=HomeActivity.phone_logged_home;
         loadingBar=new ProgressDialog(AddFriendActivity.this);
 
         myfriends= new ArrayList<>();
@@ -80,7 +96,7 @@ public class AddFriendActivity extends AppCompatActivity {
         viewFriendsLocationCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AddFriendActivity.this, MapActivity.class);
+                Intent intent=new Intent(AddFriendActivity.this, FriendsMapActivity.class);
                 startActivity(intent);
             }
         });
@@ -175,4 +191,24 @@ public class AddFriendActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.nav_menu,menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id=item.getItemId();
+//        if(id == R.id.lShare){
+//            Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+//        }
+//        if(id == R.id.lStop){
+//            Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        return true;
+//
+//    }
 }

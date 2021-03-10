@@ -7,49 +7,74 @@
     tools:context=".PermissionActivity"
     android:id="@+id/activity_main">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/permissionToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:titleTextColor="@color/fbutton_color_clouds"
+            android:background="@color/fbutton_color_carrot"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:minHeight="?attr/actionBarSize"
+            app:title="Permission"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
+            android:id="@+id/pTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_below="@id/permissionToolbar"
+            android:fontFamily="@font/nunito_extrabold"
             android:justificationMode="inter_word"
-            android:layout_margin="20dp"
-            android:id="@+id/pTextView"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/baloo"
-            android:text="@string/permission"/>
+            android:text="@string/permission"
+            android:textColor="@color/color5"
+            android:textSize="@dimen/_14sdp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/LPButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/pTextView"
             android:layout_margin="20dp"
-            android:textSize="20dp"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/baloo"
+            android:background="@drawable/roundedbutton"
             android:text="Give Location permissions" />
 
         <TextView
+            android:id="@+id/sTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:justificationMode="inter_word"
-            android:layout_margin="20dp"
-            android:id="@+id/sTextView"
             android:layout_below="@+id/LPButton"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/baloo"
-            android:text="@string/smspermission"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:justificationMode="inter_word"
+            android:text="@string/smspermission"
+            android:textColor="@color/color5"
+            android:textSize="@dimen/_14sdp" />
 
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/SPButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="20dp"
+            android:textSize="15dp"
+            android:fontFamily="@font/baloo"
+            android:textColor="@color/white"
             android:layout_margin="20dp"
+            android:background="@drawable/roundedbutton"
             android:layout_below="@+id/sTextView"
             android:text="Give SMS permissions" />
 

@@ -5,7 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,14 @@ public class SentRequestActivity extends AppCompatActivity {
         friendRequestSentRecyclerView=findViewById(R.id.friendRequestSentRecyclerView);
         friendRequestSentToolbar=findViewById(R.id.friendRequestSentToolbar);
         setSupportActionBar(friendRequestSentToolbar);
-        getSupportActionBar().setTitle("Sent Request");
+       // getSupportActionBar().setTitle("Sent Request");
+        friendRequestSentToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(SentRequestActivity.this,AddFriendActivity.class);
+                startActivity(in);
+            }
+        });
 
         friendNameS=new ArrayList<>();
         friendnumberS=new ArrayList<>();

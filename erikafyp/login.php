@@ -17,7 +17,8 @@ $count = mysqli_num_rows($query1);
 
 
 if($count==1){
-	echo "Logged in Successfully.";
+	//while($row = mysqli_fetch_array($query1)){
+		echo "Logged in Successfully.@@@".$row['fullname'];
 }else{
 	echo "Cannot Login. Username or password incorrect";
 }

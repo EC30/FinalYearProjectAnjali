@@ -7,13 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".AddFriendActivity">
 
+    <androidx.appcompat.widget.Toolbar
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="Friends"
+        app:titleTextColor="@color/fbutton_color_clouds"
+        android:background="@color/fbutton_color_amethyst"
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+        tools:ignore="MissingConstraints">
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="230dp"
         android:orientation="horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -43,7 +57,7 @@
                     android:layout_marginTop="30dp"
                     android:text="My Circle"
                     android:textSize="20sp"
-                    app:fontFamily="@font/aclonica" />
+                    app:fontFamily="@font/baloo" />
 
                 <ImageView
                     android:id="@+id/myCircleImage"
@@ -51,7 +65,7 @@
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/friend" />
+                    app:srcCompat="@drawable/friendcirle" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -78,14 +92,14 @@
                     android:layout_marginTop="30dp"
                     android:text="View Request"
                     android:textSize="20sp"
-                    app:fontFamily="@font/aclonica" />
+                    app:fontFamily="@font/baloo" />
                 <ImageView
                     android:id="@+id/viewRequestImageView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/ec" />
+                    app:srcCompat="@drawable/friendrequest" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -123,7 +137,7 @@
                     android:layout_below="@id/addFriendImageView"
                     android:textAlignment="center"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="30dp"
                     android:text="Add Friends"
                     android:textSize="20sp"
                     app:fontFamily="@font/baloo" />
@@ -134,7 +148,7 @@
                     android:layout_height="75dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    app:srcCompat="@drawable/friend" />
+                    app:srcCompat="@drawable/addfriend" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -158,17 +172,17 @@
                     android:layout_below="@id/sentRequestImageView"
                     android:textAlignment="center"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="7dp"
-                    android:text="View Sent Request"
+                    android:layout_marginTop="20dp"
+                    android:text="My Sent Request"
                     android:textSize="20sp"
                     app:fontFamily="@font/baloo" />
                 <ImageView
                     android:id="@+id/sentRequestImageView"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/ec" />
+                    app:srcCompat="@drawable/sentrequest" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -197,14 +211,14 @@
                 android:layout_marginTop="10dp"
                 android:text="View Friends Location"
                 android:textSize="20sp"
-                app:fontFamily="@font/aclonica" />
+                app:fontFamily="@font/baloo" />
             <ImageView
                 android:id="@+id/viewFriendsLocationImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                app:srcCompat="@drawable/friend" />
+                app:srcCompat="@drawable/location" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

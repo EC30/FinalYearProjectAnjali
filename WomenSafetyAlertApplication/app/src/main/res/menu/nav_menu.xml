@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/lShare"
         android:title="Share"
         android:icon="@drawable/share" />
 
     <item
-        android:id="@+id/postsFragment"
+        android:id="@+id/lStop"
         android:title="Stop"
         android:icon="@drawable/stop" />
 

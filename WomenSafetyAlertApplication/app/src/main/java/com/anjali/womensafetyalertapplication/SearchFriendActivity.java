@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -49,7 +50,14 @@ public class SearchFriendActivity extends AppCompatActivity {
         loadingBar=new ProgressDialog(this);
 
         setSupportActionBar(searchFiendToolbar);
-        getSupportActionBar().setTitle("Search Friend");
+       // getSupportActionBar().setTitle("Search Friend");
+        searchFiendToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(SearchFriendActivity.this,AddFriendActivity.class);
+                startActivity(in);
+            }
+        });
 
         friendNameSearch=new ArrayList<>();
         friendnumberSearch=new ArrayList<>();

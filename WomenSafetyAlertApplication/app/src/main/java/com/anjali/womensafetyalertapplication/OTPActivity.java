@@ -101,7 +101,10 @@ public class OTPActivity extends AppCompatActivity {
             }
         };
 
-        if(from.equals("login") || from.equals("forget")){
+        if(from.equals("login")){
+            resendOTP(phone);
+            fullname=getIntent().getStringExtra("fullname_logged");
+        }else if (from.equals("forget")){
             resendOTP(phone);
         }else{
             mVerification=getIntent().getStringExtra("code");
@@ -201,7 +204,6 @@ public class OTPActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.contains("Inserted Successfully.")){
                     loadingBar.dismiss();
-
                     sendUserToMainActivity();
                 }else if(response.contains("Cannot Insert.")){
                     loadingBar.dismiss();
@@ -246,6 +248,7 @@ public class OTPActivity extends AppCompatActivity {
         mAuth.signOut();
         preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= preferences.edit();
+        editor.putString("fullname_logged_in",fullname);
         editor.putString("user_logged",phone);
         editor.commit();
 
@@ -258,6 +261,7 @@ public class OTPActivity extends AppCompatActivity {
 
         Intent intent=new Intent(OTPActivity.this,PermissionActivity.class);
         intent.putExtra("phone_logged_main",phone);
+        intent.putExtra("fullname_logged_main",fullname);
         startActivity(intent);
     }
 }

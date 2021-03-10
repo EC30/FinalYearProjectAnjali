@@ -5,7 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,7 +25,13 @@ public class MyFriendCircle extends AppCompatActivity {
         friendCircleRecyclerView=findViewById(R.id.friendCircleRecyclerView);
         friendCircleToolbar=findViewById(R.id.friendCircleToolbar);
         setSupportActionBar(friendCircleToolbar);
-        getSupportActionBar().setTitle("My Circle");
+        friendCircleToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(MyFriendCircle.this,AddFriendActivity.class);
+                startActivity(in);
+            }
+        });
 
         friendNameC=new ArrayList<>();
         friendnumberC=new ArrayList<>();

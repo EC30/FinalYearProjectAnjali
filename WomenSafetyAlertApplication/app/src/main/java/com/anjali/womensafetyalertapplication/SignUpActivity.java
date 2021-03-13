@@ -68,6 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                textError.setText("");
                 String gender2 = "";
                 if (radioMale.isChecked()) {
                     gender2 = "m";

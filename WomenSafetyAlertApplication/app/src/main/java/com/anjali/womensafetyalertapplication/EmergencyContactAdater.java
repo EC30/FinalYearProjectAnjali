@@ -40,6 +40,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
+import io.michaelrocks.libphonenumber.android.Phonenumber;
+
 public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContactAdater.ViewHolder> {
     Context context;
     ArrayList<String> number, ecCountryCode,ecnum;
@@ -148,28 +151,39 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                                 String old_num=holder.ecCountryCodeTextView.getText().toString()+holder.ecPhoneNumberTextView.getText().toString();
 
                                 String new_num=editCountryPicker.getSelectedCountryCodeWithPlus().toString()+"@@"+edit_phoneText.getText().toString();
+                                PhoneNumberUtil pu=PhoneNumberUtil.createInstance(context);
+                                Phonenumber.PhoneNumber num=new Phonenumber.PhoneNumber();
+                                num.setCountryCode(Integer.valueOf(editCountryPicker.getSelectedCountryCodeWithPlus().toString()));
+                                num.setNationalNumber(Long.valueOf(edit_phoneText.getText().toString()));
                                 //Toast.makeText(context, holder.ecnumTextView.getText().toString(), Toast.LENGTH_SHORT).show();
-
-                                VolleyHandlerEC vh=new VolleyHandlerEC();
-                                vh.add_to_db(context,"update",new_num,holder.ecnumTextView.getText().toString(),AddECActivity.phone_logged2);
-
-                                DbHelper db = new DbHelper(v.getContext());
-
-                                db.update_wsaa(holder.ecnumTextView.getText().toString(),new_num);
-                                db.close();
-
-                                number.set(holder.getAdapterPosition(),edit_phoneText.getText().toString());
+                                if (AddECActivity.phone_logged2.equals(editCountryPicker.getSelectedCountryCodeWithPlus().toString()+edit_phoneText.getText().toString())) {
+                                    Toast.makeText(context, "You cannot add yourself as an emergency contact", Toast.LENGTH_SHORT).show();
+                                } else if (AddECActivity.econtacts.contains(new_num)) {
+                                    Toast.makeText(context, "Emergency contacts already added.", Toast.LENGTH_SHORT).show();
+                                } else if(!pu.isValidNumber(num)){
+                                    Toast.makeText(context, "Invalid Number", Toast.LENGTH_SHORT).show();
+                                }else {
 
 
+                                    VolleyHandlerEC vh = new VolleyHandlerEC();
+                                    vh.add_to_db(context, "update", new_num, holder.ecnumTextView.getText().toString(), AddECActivity.phone_logged2);
 
-                                ecCountryCode.set(holder.getAdapterPosition(),editCountryPicker.getSelectedCountryCodeWithPlus().toString());
+                                    DbHelper db = new DbHelper(v.getContext());
 
-                                for(int j=0;j<HomeActivity.eccontacts_home.size();j++){
-                                    if(old_num.equals(HomeActivity.eccontacts_home.get(j))){
-                                        HomeActivity.eccontacts_home.set(j,editCountryPicker.getSelectedCountryCodeWithPlus().toString()+edit_phoneText.getText().toString());
+                                    db.update_wsaa(holder.ecnumTextView.getText().toString(), new_num);
+                                    db.close();
+
+                                    number.set(holder.getAdapterPosition(), edit_phoneText.getText().toString());
+
+
+                                    ecCountryCode.set(holder.getAdapterPosition(), editCountryPicker.getSelectedCountryCodeWithPlus().toString());
+
+                                    for (int j = 0; j < HomeActivity.eccontacts_home.size(); j++) {
+                                        if (old_num.equals(HomeActivity.eccontacts_home.get(j))) {
+                                            HomeActivity.eccontacts_home.set(j, editCountryPicker.getSelectedCountryCodeWithPlus().toString() + edit_phoneText.getText().toString());
+                                        }
                                     }
                                 }
-
                                 AddECActivity.ecAdapter.notifyDataSetChanged();
                             }
                         });

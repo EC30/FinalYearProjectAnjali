@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anjali.womensafetyalertapplication">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -24,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WomenSafetyAlertApplication"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".CallActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -39,7 +38,7 @@
 
         <activity
             android:name=".FriendsMapActivity"
-            android:label="@string/title_activity_friends_map"></activity>
+            android:label="@string/title_activity_friends_map" />
         <activity android:name=".PermissionActivity" />
         <activity android:name=".SentRequestActivity" />
         <activity android:name=".RequestActivity" />
@@ -85,19 +84,20 @@
             android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="true" />
-
-        <receiver android:name=".ScreenReceiver"
+        <receiver
+            android:name=".ScreenReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.SCREEN_OFF"/>
-                <action android:name="android.intent.action.SCREEN_ON"/>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".MediaPlayerService"
+        <service
+            android:name=".MediaPlayerService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".SignUpActivity"

@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//        VolleyHandlerEC vh=new VolleyHandlerEC();
+//        vh.process_to_db(MainActivity.this,"read","","","+9771111111111");
         preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
         if (preferences.contains("user_logged") && preferences.contains("fullname_logged_in")) {
             Intent intent = new Intent(MainActivity.this, PermissionActivity.class);

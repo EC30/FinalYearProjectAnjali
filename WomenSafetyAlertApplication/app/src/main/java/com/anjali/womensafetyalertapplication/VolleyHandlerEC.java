@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class VolleyHandlerEC extends AddECActivity {
 
-    public void add_to_db(Context context,String action, String new_contact,String contact_to_update,String phone_logged_in){
+    public void process_to_db(Context context,String action, String new_contact,String contact_to_update,String phone_logged_in){
         ProgressDialog loadingBar=new ProgressDialog(context);
 
         UrlClass myurl = new UrlClass();
@@ -30,15 +30,15 @@ public class VolleyHandlerEC extends AddECActivity {
         loadingBar.setMessage("Please wait");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
-        String postUrl = url+"emergencycontact.php";
+        String postUrl = url+"ecdemo.php";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.contains("Updated EC Successfully.")){
                     loadingBar.dismiss();
-                    Toast.makeText(context, "Process Successful", Toast.LENGTH_SHORT).show();
-                }else if(response.contains("Cannot Update EC")){
+                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                }else if(response.contains("Cannot Complete Request.")){
                     loadingBar.dismiss();
                     String error="* Some Internal Error Occured. Cannot Add Contact. Try Again Later.";
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
@@ -46,14 +46,34 @@ public class VolleyHandlerEC extends AddECActivity {
                     loadingBar.dismiss();
                     String[] ec_data=response.split("::");
                     DbHelper db=new DbHelper(context);
-                    db.add_wsaa("EC1",ec_data[1]);
+                    //Toast.makeText(context, String.valueOf(ec_data.length), Toast.LENGTH_SHORT).show();
+                    for (int a=1; a<ec_data.length;a++){
+                        db.add_wsaa("EC"+String.valueOf(a),ec_data[a]);
+                        //Toast.makeText(context, "EC"+String.valueOf(a)+":"+ec_data[a], Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(ec_data.length<4){
+                        int n=4-ec_data.length;
+                        for(int b=ec_data.length;b<4;b++){
+                            //Toast.makeText(context, "EC"+String.valueOf(b), Toast.LENGTH_SHORT).show();
+                            db.add_wsaa("EC"+String.valueOf(b),"NULL-VAL");
+                        }
+                    }
                     //Toast.makeText(context, "EC1:"+ec_data[1], Toast.LENGTH_SHORT).show();
-                    db.add_wsaa("EC2",ec_data[2]);
+                    //db.add_wsaa("EC2",ec_data[2]);
                     //Toast.makeText(context, "EC2:"+ec_data[2], Toast.LENGTH_SHORT).show();
-                    db.add_wsaa("EC3",ec_data[3]);
+                    //db.add_wsaa("EC3",ec_data[3]);
                     //Toast.makeText(context, "EC3:"+ec_data[3], Toast.LENGTH_SHORT).show();
                     db.close();
-                }else{
+                }else if (response.contains("Deleted Successfully.")){
+                    loadingBar.dismiss();
+                    Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+
+                }else if(response.contains("Added Successfully.")){
+                    loadingBar.dismiss();
+                    Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
+                }
+                else{
                         loadingBar.dismiss();
                         String error="* Some Internal Error Occured. Try Again Later.";
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
@@ -72,8 +92,8 @@ public class VolleyHandlerEC extends AddECActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("phone_logged_in", phone_logged_in);
                 params.put("action", action);
-                params.put("contact_to_update", contact_to_update);
-                params.put("new_contact", new_contact);
+                params.put("ecphone", contact_to_update);
+                params.put("new_ecphone", new_contact);
                 return params;
             }
 

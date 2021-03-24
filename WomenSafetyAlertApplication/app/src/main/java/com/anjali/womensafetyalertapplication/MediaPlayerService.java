@@ -50,7 +50,7 @@ public class MediaPlayerService extends Service {
                                 PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), MY_PERMISSIONS_REQUEST_SEND_SMS, new Intent(sent), 0);
                                 if (HomeActivity.eccontacts_home.size() > 0) {
                                     for (int i = 0; i < HomeActivity.eccontacts_home.size(); i++) {
-                                        smsManager.sendTextMessage(HomeActivity.eccontacts_home.get(i), null, Common.LastLocation, pi, null);
+                                        smsManager.sendTextMessage(HomeActivity.eccontacts_home.get(i), null, "I think I am at risk. My current location is at, Longitude: "+Common.LastLocation.split("/")[1]+" Latitude: "+Common.LastLocation.split("/")[0], pi, null);
                                     }
                                 }
                             }else{

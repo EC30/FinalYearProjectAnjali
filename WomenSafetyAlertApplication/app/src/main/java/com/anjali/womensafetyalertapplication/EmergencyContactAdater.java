@@ -149,7 +149,7 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String old_num=holder.ecCountryCodeTextView.getText().toString()+holder.ecPhoneNumberTextView.getText().toString();
-
+                                String old_num2=holder.ecCountryCodeTextView.getText().toString()+"@@"+holder.ecPhoneNumberTextView.getText().toString();
                                 String new_num=editCountryPicker.getSelectedCountryCodeWithPlus().toString()+"@@"+edit_phoneText.getText().toString();
                                 PhoneNumberUtil pu=PhoneNumberUtil.createInstance(context);
                                 Phonenumber.PhoneNumber num=new Phonenumber.PhoneNumber();
@@ -166,7 +166,7 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
 
 
                                     VolleyHandlerEC vh = new VolleyHandlerEC();
-                                    vh.add_to_db(context, "update", new_num, holder.ecnumTextView.getText().toString(), AddECActivity.phone_logged2);
+                                    vh.process_to_db(context, "update", new_num, old_num2, AddECActivity.phone_logged2);
 
                                     DbHelper db = new DbHelper(v.getContext());
 
@@ -201,8 +201,9 @@ public class EmergencyContactAdater extends RecyclerView.Adapter<EmergencyContac
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String num_to_del=holder.ecCountryCodeTextView.getText().toString()+holder.ecPhoneNumberTextView.getText().toString();
+                        String num_to_del2=holder.ecCountryCodeTextView.getText().toString()+"@@"+holder.ecPhoneNumberTextView.getText().toString();
                         VolleyHandlerEC vh=new VolleyHandlerEC();
-                        vh.add_to_db(context,"update","NULL-VAL",holder.ecnumTextView.getText().toString(),AddECActivity.phone_logged2);
+                        vh.process_to_db(context,"delete","",num_to_del2,AddECActivity.phone_logged2);
 
                         DbHelper db = new DbHelper(view.getContext());
 

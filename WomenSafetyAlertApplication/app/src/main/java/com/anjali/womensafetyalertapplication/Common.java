@@ -10,6 +10,8 @@ import java.util.Date;
 public class Common {
     public static final String KEY_REQUESTING_LOCATION_UPDATES = "LocationUpdateEnable";
     public static String LastLocation="";
+    public static String latt="";
+    public static String longi="";
 
     public static String getLocationText(Location mLocation) {
         LastLocation= mLocation == null ? "UnKnown Location" : new StringBuilder()
@@ -18,6 +20,16 @@ public class Common {
                 .append(mLocation.getLongitude())
                 .toString();
         return LastLocation;
+    }
+    public static String getLatitude(Location mLocation){
+        latt=mLocation == null ? "UnKnown Location" : new StringBuilder()
+                .append(mLocation.getLatitude()).toString();
+        return latt;
+    }
+    public static String getLongitude(Location mLocation){
+        longi=mLocation == null ? "UnKnown Location" : new StringBuilder()
+                .append(mLocation.getLongitude()).toString();
+        return longi;
     }
 
     public static CharSequence getLocationTitle(MyBackgroundService myBackgroundService) {

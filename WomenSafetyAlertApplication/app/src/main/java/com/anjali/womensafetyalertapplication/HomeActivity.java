@@ -144,6 +144,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         db.close();
 
+
+
         followMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,7 +194,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fakecall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(HomeActivity.this, CallActivity.class);
+                startActivity(intent);
             }
         });
 

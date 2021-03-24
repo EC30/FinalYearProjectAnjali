@@ -122,6 +122,8 @@ public class AddECActivity extends AppCompatActivity {
         }
         db.close();
 
+        
+
         for (int abc=0;abc<econtacts.size();abc++){
             if(!econtacts.get(abc).equals("NULL-VAL")) {
                 String[] splited=econtacts.get(abc).split("@@");
@@ -187,10 +189,8 @@ public class AddECActivity extends AppCompatActivity {
                         } else if(!pu.isValidNumber(num)){
                             Toast.makeText(AddECActivity.this, "Invalid Number", Toast.LENGTH_SHORT).show();
                         } else{
-
-
                             VolleyHandlerEC vh = new VolleyHandlerEC();
-                            vh.add_to_db(AddECActivity.this, "update", cc + "@@" + emergencyContact, edataof.get(new_index), phone_logged2);
+                            vh.process_to_db(AddECActivity.this, "insert", cc + "@@" + emergencyContact,"", phone_logged2);
 
                             DbHelper db = new DbHelper(AddECActivity.this);
                             db.update_wsaa(edataof.get(new_index), cc + "@@" + emergencyContact);

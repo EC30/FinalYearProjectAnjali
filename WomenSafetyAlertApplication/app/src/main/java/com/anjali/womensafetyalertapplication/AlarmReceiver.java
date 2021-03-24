@@ -40,7 +40,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             //Toast.makeText(context, "received", Toast.LENGTH_SHORT).show();
             if(!Common.LastLocation.contains("UnKnown")) {
                 String[] splitted = Common.LastLocation.split("/");
-
                 VolleyHandlerFrLoc vhfl = new VolleyHandlerFrLoc();
                 vhfl.update_loc(context, intent.getStringExtra("user_phone"), splitted[0], splitted[1]);
             }

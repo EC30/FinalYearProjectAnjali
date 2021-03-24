@@ -75,7 +75,7 @@ public class DbHelper extends SQLiteOpenHelper {
         if(result == -1){
             Toast.makeText(context, "Application failed to update", Toast.LENGTH_SHORT).show();
         } else{
-            Toast.makeText(context, "Process Succesful.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Process Succesful.", Toast.LENGTH_SHORT).show();
         }
     }
 

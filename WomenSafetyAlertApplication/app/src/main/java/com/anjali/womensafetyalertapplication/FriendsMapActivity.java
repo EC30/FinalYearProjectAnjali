@@ -34,6 +34,11 @@ public class FriendsMapActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setRotateGesturesEnabled(false);
+        mMap.getUiSettings().setScrollGesturesEnabled(true);
+        mMap.getUiSettings().setTiltGesturesEnabled(false);
+
         if(AddFriendActivity.myfriends.size()>0) {
             for (int i = 0; i < AddFriendActivity.myfriends.size(); i++) {
                 friend_data += AddFriendActivity.myfriends.get(i).substring(3) + "@@@";

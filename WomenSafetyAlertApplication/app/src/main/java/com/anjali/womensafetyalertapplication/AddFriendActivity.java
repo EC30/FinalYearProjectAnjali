@@ -30,12 +30,13 @@ public class AddFriendActivity extends AppCompatActivity {
     static ArrayList<String> myfriends,myrequestsreceived,myrequestssent;
     ProgressDialog loadingBar;
     static String phone_logged;
+    static Map<String, String> friendName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-
+        friendName= new HashMap<String, String>();
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -107,8 +108,6 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     public void get_friends(String phone_logged_in){
-        //ProgressDialog loadingBar=new ProgressDialog(AddFriendActivity.this);
-
         UrlClass myurl = new UrlClass();
         String url = myurl.getUrl();
 
@@ -124,31 +123,29 @@ public class AddFriendActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.contains("Resultoffriends-->")){
                     loadingBar.dismiss();
-                    //Toast.makeText(AddFriendActivity.this, response.substring(18), Toast.LENGTH_SHORT).show();
                     if(!response.substring(18).equals("not found")){
                         String[] friends_splitted=response.substring(18).split("::::");
                         for(int i=0; i<friends_splitted.length;i++){
-                            //Toast.makeText(AddFriendActivity.this, friends_splitted[i], Toast.LENGTH_SHORT).show();
-                            //ArrayList<String> individual_split=new ArrayList<>();
                             String[] individual_split=friends_splitted[i].split("::");
-//                            for(int j=0; j<individual_split.length;j++){
-//                                if(i)
-//                            }
 
                             if(individual_split[2].equals("verified")){
                                 if(!individual_split[0].equals(phone_logged_in)){
                                     myfriends.add("1::"+individual_split[0]);
+                                    friendName.put(individual_split[0],individual_split[3]);
                                 }else if(!individual_split[1].equals(phone_logged_in)){
                                     myfriends.add("2::"+individual_split[1]);
+                                    friendName.put(individual_split[1],individual_split[3]);
                                 }
                             }else if(individual_split[2].equals("pending")){
                                 if(individual_split[0].equals(phone_logged_in)){
                                     myrequestssent.add(individual_split[1]);
+                                    friendName.put(individual_split[1],individual_split[3]);
                                 }else if(individual_split[1].equals(phone_logged_in)){
                                     myrequestsreceived.add(individual_split[0]);
+                                    friendName.put(individual_split[0],individual_split[3]);
                                 }
                             }else{
-                                //Toast.makeText(AddFriendActivity.this, "Not Known", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     }else{

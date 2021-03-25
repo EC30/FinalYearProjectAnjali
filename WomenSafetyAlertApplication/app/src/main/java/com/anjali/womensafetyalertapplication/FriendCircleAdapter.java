@@ -40,7 +40,7 @@ public class FriendCircleAdapter extends RecyclerView.Adapter<FriendCircleAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.friendNameCircle.setText(String.valueOf(friendNameC.get(position)).substring(3));
+        holder.friendNameCircle.setText(String.valueOf(friendNameC.get(position)));
         holder.friendNumberCircle.setText(String.valueOf(friendnumberC.get(position)).substring(3));
        // holder.friendCircleImageView.setImageResource(friendImageC[position]);
         holder.deleteExistingfriendButton.setOnClickListener(new View.OnClickListener() {

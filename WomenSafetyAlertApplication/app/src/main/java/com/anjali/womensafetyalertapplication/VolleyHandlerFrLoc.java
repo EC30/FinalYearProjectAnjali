@@ -47,7 +47,7 @@ public class VolleyHandlerFrLoc extends AddFriendActivity {
 
                             LatLng friend_loc = new LatLng(Double.valueOf(individual_split[1]), Double.valueOf(individual_split[2]));
                             //new LatLng()
-                            FriendsMapActivity.mMap.addMarker(new MarkerOptions().position(friend_loc).title(individual_split[0]));
+                            FriendsMapActivity.mMap.addMarker(new MarkerOptions().position(friend_loc).title(AddFriendActivity.friendName.get(individual_split[0])));
                             FriendsMapActivity.mMap.moveCamera(CameraUpdateFactory.newLatLng(friend_loc));
                             Toast.makeText(context, "Process Successful", Toast.LENGTH_SHORT).show();
                         }

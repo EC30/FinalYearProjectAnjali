@@ -27,7 +27,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SearchFriendActivity extends AppCompatActivity {
+public class
+
+SearchFriendActivity extends AppCompatActivity {
     private RecyclerView searchFriendRecyclerView;
     private Toolbar searchFiendToolbar;
     private CountryCodePicker countryPickerSearch;
@@ -113,9 +115,10 @@ public class SearchFriendActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.contains("User Exists.")){
                     //textError.setText("* Phone Number Already Exists.");
+
                     loadingBar.dismiss();
                     friendnumberSearch.add(phone2);
-                    friendNameSearch.add("User");
+                    friendNameSearch.add(response.substring(14));
                     searchFriendAdapter.notifyDataSetChanged();
 
                 }else if(response.contains("User Not Exists.")){

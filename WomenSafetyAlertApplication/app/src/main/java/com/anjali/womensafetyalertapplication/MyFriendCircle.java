@@ -42,7 +42,8 @@ public class MyFriendCircle extends AppCompatActivity {
         for(int i=0;i<AddFriendActivity.myfriends.size();i++){
            // Toast.makeText(this, AddFriendActivity.myfriends.get(i), Toast.LENGTH_SHORT).show();
             friendnumberC.add(AddFriendActivity.myfriends.get(i).toString());
-            friendNameC.add(AddFriendActivity.myfriends.get(i).toString());
+            friendNameC.add(AddFriendActivity.friendName.get(AddFriendActivity.myfriends.get(i).toString().substring(3)));
+            //friendNameC.add(AddFriendActivity.myfriends.get(i).toString());
             fAdapter.notifyDataSetChanged();
         }
     }

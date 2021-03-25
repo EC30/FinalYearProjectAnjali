@@ -41,7 +41,7 @@ public class SentRequestActivity extends AppCompatActivity {
 
         for(int i=0;i<AddFriendActivity.myrequestssent.size();i++){
             friendnumberS.add(AddFriendActivity.myrequestssent.get(i).toString());
-            friendNameS.add(AddFriendActivity.myrequestssent.get(i).toString());
+            friendNameS.add(AddFriendActivity.friendName.get(AddFriendActivity.myrequestssent.get(i).toString()));
             frsAdapter.notifyDataSetChanged();
         }
     }

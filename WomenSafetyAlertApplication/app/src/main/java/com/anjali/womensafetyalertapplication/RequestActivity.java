@@ -44,7 +44,7 @@ public class RequestActivity extends AppCompatActivity {
         for(int i=0;i<AddFriendActivity.myrequestsreceived.size();i++){
             //Toast.makeText(this, AddFriendActivity.myrequestsreceived.get(i), Toast.LENGTH_SHORT).show();
             friendnumberR.add(AddFriendActivity.myrequestsreceived.get(i).toString());
-            friendNameR.add(AddFriendActivity.myrequestsreceived.get(i).toString());
+            friendNameR.add(AddFriendActivity.friendName.get(AddFriendActivity.myrequestsreceived.get(i).toString()));
             frAdapter.notifyDataSetChanged();
         }
     }

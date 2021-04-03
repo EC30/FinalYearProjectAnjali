@@ -104,6 +104,8 @@ public class AddFriendActivity extends AppCompatActivity {
 
         get_friends(phone_logged);
 
+        //Toast.makeText(this, phone_logged, Toast.LENGTH_SHORT).show();
+
 
     }
 

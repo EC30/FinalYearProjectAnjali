@@ -21,7 +21,7 @@
 <!--        app:srcCompat="@drawable/user_image" />-->
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/imageView"
+        android:id="@+id/pImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/user_image"

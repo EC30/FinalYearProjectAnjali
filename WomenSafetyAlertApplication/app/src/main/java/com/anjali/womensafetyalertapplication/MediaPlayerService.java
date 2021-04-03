@@ -41,7 +41,7 @@ public class MediaPlayerService extends Service {
                 0 -- volume button released
                  */
                         long pressTime = System.currentTimeMillis();
-                        if(direction==-1) {
+                        if(direction==1) {
                             if(pressTime-lastPressed<=DOUBLE_PRESS_INTERVAL) {
                                 //Toast.makeText(this, "Volume - pressed twice", Toast.LENGTH_SHORT).show();
                                 int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;

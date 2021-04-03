@@ -28,9 +28,11 @@ public class VolleyHandlerFrLoc extends AddFriendActivity {
 
 
         //loadingBar.setTitle("Adding Emergency Contact...");
-        loadingBar.setMessage("Please wait");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();
+        if(FriendsMapActivity.is_frmap_active) {
+            loadingBar.setMessage("Please wait");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+        }
         String postUrl = url+"loc_handler.php";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl, new Response.Listener<String>() {
@@ -40,16 +42,18 @@ public class VolleyHandlerFrLoc extends AddFriendActivity {
                     //Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                     if(!response.contains("not found")) {
-                        String[] friends_splitted=response.substring(21).split("::::");
-                        FriendsMapActivity.mMap.clear();
-                        for(int i=0; i<friends_splitted.length;i++) {
-                            String[] individual_split=friends_splitted[i].split("::");
+                        if(FriendsMapActivity.is_frmap_active){
+                            String[] friends_splitted=response.substring(21).split("::::");
+                            FriendsMapActivity.mMap.clear();
+                            for(int i=0; i<friends_splitted.length;i++) {
+                                String[] individual_split=friends_splitted[i].split("::");
 
-                            LatLng friend_loc = new LatLng(Double.valueOf(individual_split[1]), Double.valueOf(individual_split[2]));
-                            //new LatLng()
-                            FriendsMapActivity.mMap.addMarker(new MarkerOptions().position(friend_loc).title(AddFriendActivity.friendName.get(individual_split[0])));
-                            FriendsMapActivity.mMap.moveCamera(CameraUpdateFactory.newLatLng(friend_loc));
-                            Toast.makeText(context, "Process Successful", Toast.LENGTH_SHORT).show();
+                                LatLng friend_loc = new LatLng(Double.valueOf(individual_split[1]), Double.valueOf(individual_split[2]));
+                                //new LatLng()
+                                FriendsMapActivity.mMap.addMarker(new MarkerOptions().position(friend_loc).title(AddFriendActivity.friendName.get(individual_split[0])));
+                                FriendsMapActivity.mMap.moveCamera(CameraUpdateFactory.newLatLng(friend_loc));
+                                Toast.makeText(context, "Process Successful", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 }else{

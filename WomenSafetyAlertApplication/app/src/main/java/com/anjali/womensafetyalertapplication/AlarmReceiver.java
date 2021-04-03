@@ -11,6 +11,8 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.Console;
+
 public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
@@ -29,7 +31,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             PendingIntent pi = PendingIntent.getBroadcast(context, MY_PERMISSIONS_REQUEST_SEND_SMS, new Intent(sent), 0);
             for (int i = 0; i < splitted.length; i++) {
-                smsManager.sendTextMessage(splitted[i], null, Common.LastLocation, pi, null);
+               // smsManager.sendTextMessage(splitted[i], null, Common.LastLocation, pi, null);
+                smsManager.sendTextMessage(splitted[i],null,"My current location is at, Longitude: "+Common.LastLocation.split("/")[1]+" Latitude: "+Common.LastLocation.split("/")[0],pi,null);
                // this.registerReceiver(this.batterryLevelReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
             }
@@ -40,6 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             //Toast.makeText(context, "received", Toast.LENGTH_SHORT).show();
             if(!Common.LastLocation.contains("UnKnown")) {
                 String[] splitted = Common.LastLocation.split("/");
+                Log.d("last_loc",Common.LastLocation);
                 VolleyHandlerFrLoc vhfl = new VolleyHandlerFrLoc();
                 vhfl.update_loc(context, intent.getStringExtra("user_phone"), splitted[0], splitted[1]);
             }

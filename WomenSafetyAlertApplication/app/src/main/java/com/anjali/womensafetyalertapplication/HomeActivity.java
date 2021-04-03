@@ -22,24 +22,38 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private NavigationView nav_view;
+    private ImageView imageView;
     private CardView addFriendCardView,viewLocation,addEmergencyContactCardView, followMe,fakecall,sounds;
     private Toolbar toolbar;
     private RelativeLayout followMeRelativeLayout;
@@ -71,6 +85,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer=findViewById(R.id.drawer);
         nav_view=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
+        imageView=findViewById(R.id.pImageView);
         followMeRelativeLayout=findViewById(R.id.followMeRelativeLayout);
         loggedUserName=headerView.findViewById(R.id.loggedUserName);
         loggedUserPhone=headerView.findViewById(R.id.loggedUserPhone);
@@ -143,7 +158,39 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         db.close();
-
+//
+//        UrlClass url1=new UrlClass();
+//        String filePath=url1.getUrl()+"upload/"+phone_logged_home.substring(1)+".jpeg";
+//        Toast.makeText(this, filePath, Toast.LENGTH_SHORT).show();
+//
+//        //InputStream inputStream= null;
+//        try {
+//            //inputStream = getContentResolver().openInputStream(Uri.parse(filePath));
+//            //inputStream = (InputStream) new URL(filePath).getContent();
+//            URL url=new URL(filePath);
+////            URLConnection ucon = url.openConnection();
+////            InputStream is = ucon.getInputStream();
+////            BufferedInputStream bis = new BufferedInputStream(is);
+////            ByteArrayBuffer baf = new ByteArrayBuffer(50);
+////            int current = 0;
+////            while ((current = bis.read()) != -1) {
+////                baf.append((byte) current);
+////            }
+//            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//            urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+//            urlConnection.connect();
+//            InputStream in = urlConnection.getInputStream();
+//
+//
+//
+//            //InputStream inputStream = (InputStream) new URL(filePath).getContent();
+//            //Drawable d=Drawable.createFromStream(inputStream,filePath);
+//            //Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
+//            Bitmap bitmap= BitmapFactory.decodeStream(in);
+//            imageView.setImageBitmap(bitmap);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
         followMe.setOnClickListener(new View.OnClickListener() {
@@ -256,6 +303,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent1=new Intent(HomeActivity.this,DefenseTipsActivity.class);
                 startActivity(intent1);
                 break;
+                case R.id.editprofile:
+                        Intent intent3=new Intent(HomeActivity.this,ProfileActivity.class);
+                        startActivity(intent3);
+                        break;
+
             case R.id.logout:
                 SharedPreferences preferences = getSharedPreferences("LOGIN_WSAA", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();

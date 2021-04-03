@@ -31,6 +31,17 @@
         </menu>
     </item>
 
+    <item android:title="Profile">
+
+        <menu>
+            <item
+                android:id="@+id/editprofile"
+                android:icon="@drawable/ic_edit"
+                android:title="Edit profile"/>
+
+        </menu>
+    </item>
+
     <item android:title="Logout">
 
         <menu>

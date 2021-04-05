@@ -39,6 +39,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import io.michaelrocks.libphonenumber.android.Phonenumber;
@@ -46,7 +47,7 @@ import io.michaelrocks.libphonenumber.android.Phonenumber;
 import static com.anjali.womensafetyalertapplication.HomeActivity.phone_logged_home;
 
 public class ProfileActivity extends AppCompatActivity {
-    private ImageView profileImage;
+    static ImageView profileImage;
     private Button btn_addPhoto, btn_changepassword;
     private TextView nameTV;
     final int CODE_GALLERY_REQUEST=999;
@@ -65,11 +66,40 @@ public class ProfileActivity extends AppCompatActivity {
         btn_addPhoto=findViewById(R.id.addPhoto);
         nameTV=findViewById(R.id.nameTV);
         btn_changepassword=findViewById(R.id.btn_changepassword);
-        phonelogged2= phone_logged_home;
+        phonelogged2= HomeActivity.phone_logged_home;
         fullname=HomeActivity.fullname_logged_home;
 
         nameTV.setText(fullname);
 
+        UrlClass my_url= new UrlClass();
+        String load_url=my_url.getUrl()+"upload/"+HomeActivity.phone_logged_home.substring(1)+".jpg";
+
+        Picasso.with(ProfileActivity.this).load(load_url).placeholder(R.drawable.user_image).into(profileImage,
+                new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        //do smth when picture is loaded successfully
+                        btn_addPhoto.setText("Change Photo");
+                    }
+
+                    @Override
+                    public void onError() {
+                        //do smth when there is picture loading error
+
+                    }
+                });
+//        UrlClass my_url= new UrlClass();
+//        String load_url=my_url.getUrl()+"upload/"+HomeActivity.phone_logged_home.substring(1)+".jpg";
+//        LoadPhoto task1=new LoadPhoto();
+//        Bitmap myimage=null;
+//        try {
+//            myimage=task1.execute(load_url).get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        profileImage.setImageBitmap(myimage);
 
         btn_changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
                 InputStream inputStream=getContentResolver().openInputStream(filePath);
                 bitmap= BitmapFactory.decodeStream(inputStream);
                 profileImage.setImageBitmap(bitmap);
+                HomeActivity.imageView.setImageBitmap(bitmap);
                 encodeBitmapImage(bitmap);
                 UploadPhoto();
 
@@ -201,6 +232,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 protected Map<String, String> getParams() {
                                     Map<String, String> params = new HashMap<String, String>();
                                     params.put("phone_login", phonelogged2);
+                                    params.put("passwd_old", oldpassw);
                                     params.put("passwd_new", newps);
                                     return params;
                                 }
@@ -212,7 +244,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     return params;
                                 }
                             };
-
+                            requestQueue.add(stringRequest);
                     }
                     }
 
@@ -236,6 +268,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.contains("File Uploaded Successfully")) {
                     Toast.makeText(ProfileActivity.this, "Uploaded.", Toast.LENGTH_SHORT).show();
+                    btn_addPhoto.setText("Change Photo");
                 } else if (response.contains("Could not upload File")) {
                     Toast.makeText(ProfileActivity.this, "Could not upload File", Toast.LENGTH_SHORT).show();
                 } else {
@@ -257,18 +290,8 @@ public class ProfileActivity extends AppCompatActivity {
                 maps.put("phone_logged",phonelogged2);
                 return maps;
             }
-
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("Content-Type", "application/x-www-form-urlencoded");
-//                return params;
-//            }
         };
-//        String filePath=myurl.getUrl()+"upload/"+phone_logged_home.substring(1)+".jpeg";
-//        requestQueue.add(stringRequest);
-//        Picasso.with(ProfileActivity.this)
-//                .load(filePath)
-//                .resize(100,100).into(profileImage);
+
+        requestQueue.add(stringRequest);
     }
 }

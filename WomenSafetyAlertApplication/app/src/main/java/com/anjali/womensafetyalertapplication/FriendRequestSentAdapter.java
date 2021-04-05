@@ -2,6 +2,7 @@ package com.anjali.womensafetyalertapplication;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,6 +46,12 @@ public class FriendRequestSentAdapter extends RecyclerView.Adapter<FriendRequest
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.requestSentName.setText(String.valueOf(friendNameS.get(position)));
         holder.requestSentNumber.setText(String.valueOf(friendnumberS.get(position)));
+
+        UrlClass my_url= new UrlClass();
+        String load_url=my_url.getUrl()+"upload/"+String.valueOf(friendnumberS.get(position)).substring(1)+".jpg";
+        //Toast.makeText(context, load_url, Toast.LENGTH_SHORT).show();
+        Picasso.with(context).load(Uri.parse(load_url)).placeholder(R.drawable.user_image).into(holder.requestSentImageView);
+
         //holder.requestImageView.setImageResource(friendImageR[position]);
         holder.deleteSentRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override

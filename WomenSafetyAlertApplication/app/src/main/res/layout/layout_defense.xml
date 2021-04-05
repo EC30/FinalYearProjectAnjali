@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/mintcream"
+            android:background="@drawable/coloredborder"
             android:orientation="vertical">
 
             <LinearLayout
@@ -38,9 +38,10 @@
                     android:id="@+id/dTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/baloo"
+                    android:fontFamily="@font/nunito_extrabold"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:textColor="@color/color5"
                     android:justificationMode="inter_word"
                     android:layout_marginRight="10dp"
                     android:layout_margin="6dp"
@@ -58,8 +59,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="10dp"
+                    android:fontFamily="@font/nunito_semibold"
                     android:justificationMode="inter_word"
-                    android:textColor="@color/black"
+                    android:textColor="@color/color5"
                     android:textSize="15dp"
                     android:text="Body" />
 

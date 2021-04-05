@@ -12,12 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SAFETY TIPS FOR WOMEN"
-        android:fontFamily="@font/baloo"
+        android:fontFamily="@font/nunito_extrabold"
         android:textAlignment="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="20dp"
+        android:textColor="@color/color5"
         tools:layout_editor_absoluteX="106dp"
         tools:layout_editor_absoluteY="50dp" />
 

@@ -32,7 +32,10 @@ public class AlarmReceiver extends BroadcastReceiver {
             PendingIntent pi = PendingIntent.getBroadcast(context, MY_PERMISSIONS_REQUEST_SEND_SMS, new Intent(sent), 0);
             for (int i = 0; i < splitted.length; i++) {
                // smsManager.sendTextMessage(splitted[i], null, Common.LastLocation, pi, null);
-                smsManager.sendTextMessage(splitted[i],null,"My current location is at, Longitude: "+Common.LastLocation.split("/")[1]+" Latitude: "+Common.LastLocation.split("/")[0],pi,null);
+                String SMS_TEXT="https://www.google.com/maps/search/"+Common.LastLocation.split("/")[0]+","+Common.LastLocation.split("/")[1];
+
+                smsManager.sendTextMessage(splitted[i],null,"My current location is at, "+SMS_TEXT+" .Please click on the link to view in browser.",pi,null);
+                //smsManager.sendTextMessage(splitted[i],null,"My current location is at, Longitude: "+Common.LastLocation.split("/")[1]+" Latitude: "+Common.LastLocation.split("/")[0],pi,null);
                // this.registerReceiver(this.batterryLevelReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
             }

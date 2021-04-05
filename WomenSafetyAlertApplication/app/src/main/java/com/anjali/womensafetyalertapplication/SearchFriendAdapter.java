@@ -2,6 +2,7 @@ package com.anjali.womensafetyalertapplication;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,6 +44,12 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.addFriendName.setText(String.valueOf(friendNameSearch.get(position)));
         holder.addFriendNumber.setText(String.valueOf(friendnumberSearch.get(position)));
+
+        UrlClass my_url= new UrlClass();
+        String load_url=my_url.getUrl()+"upload/"+String.valueOf(friendnumberSearch.get(position)).substring(1)+".jpg";
+        //Toast.makeText(context, load_url, Toast.LENGTH_SHORT).show();
+        Picasso.with(context).load(Uri.parse(load_url)).placeholder(R.drawable.user_image).into(holder.addFriendImageView);
+
        // holder.addFriendImageView.setImageResource(friendImage[position]);
         holder.addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +57,7 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
                 VolleyHandlerFriends vhf=new VolleyHandlerFriends();
                 vhf.process_friend_request(context,AddFriendActivity.phone_logged,holder.addFriendNumber.getText().toString(),"pending","insert");
                 AddFriendActivity.myrequestssent.add(holder.addFriendNumber.getText().toString());
+                AddFriendActivity.friendName.put(holder.addFriendNumber.getText().toString(),holder.addFriendName.getText().toString());
                 friendnumberSearch.remove(holder.getAdapterPosition());
                 friendNameSearch.remove(holder.getAdapterPosition());
                 SearchFriendActivity.searchFriendAdapter.notifyDataSetChanged();

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="170dp"
     android:layout_margin="10dp"
     android:orientation="horizontal"
     android:id="@+id/friendCircleLinearLayout"
@@ -26,9 +26,11 @@
             android:id="@+id/friendCircleName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
             android:paddingLeft="40dp"
-            android:paddingTop="20dp"
+            android:paddingTop="5dp"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/color5"
             android:text="Friend name"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -37,19 +39,22 @@
             android:id="@+id/friendCircleNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/color5"
             android:paddingLeft="40dp"
             android:paddingTop="10dp"
             android:text="Number"
-            android:textStyle="bold" />
+            android:textStyle="italic" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/deleteExistingFriendButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:background="@color/black"
-            android:fontFamily="@font/baloo"
+            android:fontFamily="@font/nunito_extrabold"
+            android:textSize="@dimen/_16sdp"
+            android:background="@drawable/deletebutton"
             android:text="DELETE FRIEND" />
     </LinearLayout>
 

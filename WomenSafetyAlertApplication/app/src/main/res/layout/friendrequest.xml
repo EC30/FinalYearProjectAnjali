@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="170dp"
     android:layout_margin="10dp"
     android:id="@+id/friendRequestLinearLayout"
     android:orientation="horizontal"
@@ -27,8 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
-            android:paddingTop="20dp"
+            android:paddingTop="5dp"
+            android:textSize="@dimen/_16sdp"
             android:text="Friend name"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/color5"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
 
@@ -36,8 +39,11 @@
             android:id="@+id/friendNumberRequest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textStyle="italic"
             android:paddingTop="10dp"
+            android:textSize="@dimen/_13sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/color5"
             android:paddingLeft="40dp"
             android:text="Number" />
 
@@ -46,21 +52,25 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/confirmRequestButton"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/black"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textSize="@dimen/_16sdp"
+                android:background="@drawable/confirmbutton"
                 android:text="CONFIRM" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/deleteRequestButton"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/black"
+                android:fontFamily="@font/nunito_extrabold"
+                android:textSize="@dimen/_16sdp"
+                android:background="@drawable/deletebutton"
                 android:text="DELETE" />
         </LinearLayout>
     </LinearLayout>

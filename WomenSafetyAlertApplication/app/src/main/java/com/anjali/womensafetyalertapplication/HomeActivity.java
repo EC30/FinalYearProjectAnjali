@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -39,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
@@ -49,11 +51,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private NavigationView nav_view;
-    private ImageView imageView;
+    static ImageView imageView,friends_image;
     private CardView addFriendCardView,viewLocation,addEmergencyContactCardView, followMe,fakecall,sounds;
     private Toolbar toolbar;
     private RelativeLayout followMeRelativeLayout;
@@ -82,10 +85,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 
+        friends_image=findViewById(R.id.friendsImage);
         drawer=findViewById(R.id.drawer);
         nav_view=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
-        imageView=findViewById(R.id.pImageView);
+        imageView=headerView.findViewById(R.id.pImageView);
         followMeRelativeLayout=findViewById(R.id.followMeRelativeLayout);
         loggedUserName=headerView.findViewById(R.id.loggedUserName);
         loggedUserPhone=headerView.findViewById(R.id.loggedUserPhone);
@@ -94,6 +98,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         followMe=findViewById(R.id.followMe);
         fakecall=findViewById(R.id.fakecall);
         sounds=findViewById(R.id.sounds);
+
+
 
         eccontacts_home=new ArrayList<>();
 
@@ -158,39 +164,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         db.close();
-//
-//        UrlClass url1=new UrlClass();
-//        String filePath=url1.getUrl()+"upload/"+phone_logged_home.substring(1)+".jpeg";
-//        Toast.makeText(this, filePath, Toast.LENGTH_SHORT).show();
-//
-//        //InputStream inputStream= null;
+
+        UrlClass my_url= new UrlClass();
+        String load_url=my_url.getUrl()+"upload/"+HomeActivity.phone_logged_home.substring(1)+".jpg";
+        Picasso.with(HomeActivity.this).load(Uri.parse(load_url)).placeholder(R.drawable.user_image).into(imageView);
+//        UrlClass my_url= new UrlClass();
+//        String load_url=my_url.getUrl()+"upload/"+phone_logged_home.substring(1)+".jpg";
+//        LoadPhoto task1=new LoadPhoto();
+//        Bitmap myimage=null;
 //        try {
-//            //inputStream = getContentResolver().openInputStream(Uri.parse(filePath));
-//            //inputStream = (InputStream) new URL(filePath).getContent();
-//            URL url=new URL(filePath);
-////            URLConnection ucon = url.openConnection();
-////            InputStream is = ucon.getInputStream();
-////            BufferedInputStream bis = new BufferedInputStream(is);
-////            ByteArrayBuffer baf = new ByteArrayBuffer(50);
-////            int current = 0;
-////            while ((current = bis.read()) != -1) {
-////                baf.append((byte) current);
-////            }
-//            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//            urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-//            urlConnection.connect();
-//            InputStream in = urlConnection.getInputStream();
-//
-//
-//
-//            //InputStream inputStream = (InputStream) new URL(filePath).getContent();
-//            //Drawable d=Drawable.createFromStream(inputStream,filePath);
-//            //Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
-//            Bitmap bitmap= BitmapFactory.decodeStream(in);
-//            imageView.setImageBitmap(bitmap);
-//        } catch (IOException e) {
+//            myimage=task1.execute(load_url).get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
+//        imageView.setImageBitmap(myimage);
+
 
 
         followMe.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +275,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else{
-            super.onBackPressed();
+            this.moveTaskToBack(true);
+//            new AlertDialog.Builder(this)
+//                    .setTitle("Really Exit?")
+//                    .setMessage("Are you sure you want to exit?")
+//                    .setNegativeButton(android.R.string.no, null)
+//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            moveTaskToBack(true);
+//                            System.exit(1);
+//                        }
+//
+//        }).create().show();
+           // super.onBackPressed();
         }
 
     }
@@ -391,5 +394,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         CheckGpsStatus();
     }
+
+
 
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="170dp"
     android:layout_margin="10dp"
     android:orientation="horizontal"
     android:id="@+id/linearLayoutAddFriend"
@@ -26,28 +26,36 @@
             android:id="@+id/addFriendName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:paddingTop="5dp"
             android:paddingLeft="40dp"
             android:textStyle="bold"
+            android:textSize="@dimen/_16sdp"
             android:text="Friend name"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/color5"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/addFriendNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textStyle="italic"
             android:paddingTop="10dp"
             android:paddingLeft="40dp"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/color5"
             android:text="Number" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addFriendButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:text="ADD FRIEND"
-                android:background="@color/black"/>
+                android:fontFamily="@font/nunito_extrabold"
+                android:textSize="@dimen/_16sdp"
+                android:background="@drawable/confirmbutton"/>
     </LinearLayout>
 
 

@@ -2,6 +2,7 @@ package com.anjali.womensafetyalertapplication;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class FriendCircleAdapter extends RecyclerView.Adapter<FriendCircleAdapter.ViewHolder>{
@@ -22,7 +25,7 @@ public class FriendCircleAdapter extends RecyclerView.Adapter<FriendCircleAdapte
     Context context;
     private LayoutInflater layoutInflater;
     ArrayList<String> friendnumberC, friendNameC;
-    private Integer friendImageC[];
+    private ImageView friendImageC[];
 
     public FriendCircleAdapter( Context context, ArrayList<String> friendnumberC, ArrayList<String> friendNameC) {
         this.context = context;
@@ -35,6 +38,7 @@ public class FriendCircleAdapter extends RecyclerView.Adapter<FriendCircleAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.friendcircle, parent, false);
+
         return new FriendCircleAdapter.ViewHolder(view);
     }
 
@@ -42,7 +46,13 @@ public class FriendCircleAdapter extends RecyclerView.Adapter<FriendCircleAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.friendNameCircle.setText(String.valueOf(friendNameC.get(position)));
         holder.friendNumberCircle.setText(String.valueOf(friendnumberC.get(position)).substring(3));
-       // holder.friendCircleImageView.setImageResource(friendImageC[position]);
+        //holder.friendCircleImageView.setImageResource(friendImageC[position]);
+        //holder.friendCircleImageView
+        UrlClass my_url= new UrlClass();
+        String load_url=my_url.getUrl()+"upload/"+String.valueOf(friendnumberC.get(position)).substring(4)+".jpg";
+        //Toast.makeText(context, load_url, Toast.LENGTH_SHORT).show();
+        Picasso.with(context).load(Uri.parse(load_url)).placeholder(R.drawable.user_image).into(holder.friendCircleImageView);
+
         holder.deleteExistingfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

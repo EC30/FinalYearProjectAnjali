@@ -47,10 +47,11 @@ public class MediaPlayerService extends Service {
                                 int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
                                 SmsManager smsManager = SmsManager.getDefault();
                                 String sent = "SMS_SENT";
+                                String SMS_TEXT="https://www.google.com/maps/search/"+Common.LastLocation.split("/")[0]+","+Common.LastLocation.split("/")[1];
                                 PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), MY_PERMISSIONS_REQUEST_SEND_SMS, new Intent(sent), 0);
                                 if (HomeActivity.eccontacts_home.size() > 0) {
                                     for (int i = 0; i < HomeActivity.eccontacts_home.size(); i++) {
-                                        smsManager.sendTextMessage(HomeActivity.eccontacts_home.get(i), null, "I think I am at risk. My current location is at, Longitude: "+Common.LastLocation.split("/")[1]+" Latitude: "+Common.LastLocation.split("/")[0], pi, null);
+                                        smsManager.sendTextMessage(HomeActivity.eccontacts_home.get(i), null, "I think I am at risk. My current location is at, "+SMS_TEXT, pi, null);
                                     }
                                 }
                             }else{

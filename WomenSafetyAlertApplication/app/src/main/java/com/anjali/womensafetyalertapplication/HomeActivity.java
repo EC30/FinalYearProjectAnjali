@@ -6,13 +6,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.app.AlarmManager;
-import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -22,11 +24,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,16 +43,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
@@ -60,6 +52,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private CardView addFriendCardView,viewLocation,addEmergencyContactCardView, followMe,fakecall,sounds;
     private Toolbar toolbar;
     private RelativeLayout followMeRelativeLayout;
+    private ImageButton callButton;
+    private static final int Request_call=1;
+    private ConstraintLayout followMeConLayout;
     private TextView loggedUserPhone, loggedUserName;
     static String phone_logged_home,fullname_logged_home;
     static ArrayList<String> eccontacts_home;
@@ -98,6 +93,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         followMe=findViewById(R.id.followMe);
         fakecall=findViewById(R.id.fakecall);
         sounds=findViewById(R.id.sounds);
+        callButton=findViewById(R.id.callButton);
 
 
 
@@ -188,8 +184,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 if(MyBackgroundService.isSMSsent){
                     MyBackgroundService.isSMSsent=false;
-                    followMeRelativeLayout.setBackgroundColor(Color.WHITE);
-                    followMeRelativeLayout.setBackground(ContextCompat.getDrawable(HomeActivity.this,R.drawable.coloredborder));
+                    //followMeRelativeLayout.setBackgroundColor(Color.WHITE);
+                    followMeRelativeLayout.setBackground(ContextCompat.getDrawable(HomeActivity.this,R.drawable.cardviewgradient3));
+
+                   // followMeConLayout.setBackground(ContextCompat.getDrawable(HomeActivity.this,R.drawable.cardviewgradient3));
                     AlarmManager am=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
                     Intent i = new Intent(HomeActivity.this, AlarmReceiver.class);
                     PendingIntent pi = PendingIntent.getBroadcast(HomeActivity.this, 1010, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -198,8 +196,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     mNotificationManager.cancel(152207);
                 } else {
                     if (eccontacts_home.size() > 0) {
-                        followMeRelativeLayout.setBackgroundColor(Color.GREEN);
-                        //followMeRelativeLayout.setBackground(ContextCompat.getDrawable(HomeActivity.this,R.drawable.coloredborder));
+                       followMeRelativeLayout.setBackgroundColor(Color.GREEN);
+                      // followMeConLayout.setBackgroundColor(Color.GREEN);
+                       // followMeRelativeLayout.setBackground(ContextCompat.getDrawable(HomeActivity.this,R.drawable.cardviewgradient3));
                         String all_contacts = "";
                         for (int i = 0; i < eccontacts_home.size(); i++) {
                             //Toast.makeText(HomeActivity.this, eccontacts_home.get(i), Toast.LENGTH_SHORT).show();
@@ -268,6 +267,46 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
+
+        sounds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this,SoundsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makePhoneCall();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==Request_call){
+            if(grantResults.length >0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                makePhoneCall();
+            }else{
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void makePhoneCall() {
+        String number="+9779842141667";
+        if(ContextCompat.checkSelfPermission(HomeActivity.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(HomeActivity.this,
+                    new String[] {Manifest.permission.CALL_PHONE}, Request_call);
+
+        } else{
+            String dial="tel:" + number;
+            startActivity(new Intent(Intent.ACTION_CALL,Uri.parse(dial)));
+        }
     }
 
     @Override

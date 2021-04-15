@@ -77,7 +77,7 @@ public class PermissionActivity extends AppCompatActivity {
 
         if(checkLocationPermissions()){
             LocPButton.setText("Location Permission Granted");
-            LocPButton.setBackgroundColor(Color.GREEN);
+            LocPButton.setBackground(getApplicationContext().getResources().getDrawable(R.drawable.buttoncolorchange));
             LocPButton.setEnabled(false);
             bindService(new Intent(PermissionActivity.this, MyBackgroundService.class),
                     mServiceConnection,

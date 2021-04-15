@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    android:background="@color/purple_200"
+    android:background="@color/pink"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="16dp"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:textStyle="bold"
-        android:text="Your name"
+        android:text="Sherya Karki"
         android:fontFamily="@font/baloo"
         android:textSize="@dimen/_16sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -49,5 +49,5 @@
         android:textStyle="bold"
         android:fontFamily="@font/baloo"
         android:textSize="@dimen/_16sdp"
-        android:text="Your Number" />
+        android:text="+9779815922786" />
 </LinearLayout>

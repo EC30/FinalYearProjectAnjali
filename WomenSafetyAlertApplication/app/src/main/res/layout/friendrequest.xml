@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="150dp"
     android:layout_margin="10dp"
     android:id="@+id/friendRequestLinearLayout"
     android:orientation="horizontal"
     android:background="@drawable/coloredborder">
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/requestimageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             android:paddingTop="5dp"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_12sdp"
             android:text="Friend name"
-            android:fontFamily="@font/nunito_semibold"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/color5"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:textStyle="italic"
             android:paddingTop="10dp"
-            android:textSize="@dimen/_13sdp"
-            android:fontFamily="@font/nunito_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/color5"
             android:paddingLeft="40dp"
             android:text="Number" />
@@ -56,9 +56,9 @@
                 android:id="@+id/confirmRequestButton"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/nunito_extrabold"
-                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/baloo"
+                android:textSize="@dimen/_14sdp"
                 android:background="@drawable/confirmbutton"
                 android:text="CONFIRM" />
 
@@ -67,9 +67,9 @@
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/nunito_extrabold"
-                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/baloo"
+                android:textSize="@dimen/_14sdp"
                 android:background="@drawable/deletebutton"
                 android:text="DELETE" />
         </LinearLayout>

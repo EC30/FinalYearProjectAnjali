@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="150dp"
     android:layout_margin="10dp"
     android:orientation="horizontal"
     android:id="@+id/linearLayoutAddFriend"
     android:background="@drawable/coloredborder">
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/addFriendImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -26,14 +26,14 @@
             android:id="@+id/addFriendName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
+            android:fontFamily="@font/baloo"
             android:paddingLeft="40dp"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16sdp"
+            android:paddingTop="5dp"
             android:text="Friend name"
-            android:fontFamily="@font/nunito_semibold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/color5"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/addFriendNumber"
@@ -42,8 +42,8 @@
             android:textStyle="italic"
             android:paddingTop="10dp"
             android:paddingLeft="40dp"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/nunito_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/color5"
             android:text="Number" />
 
@@ -51,10 +51,10 @@
                 android:id="@+id/addFriendButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:text="ADD FRIEND"
-                android:fontFamily="@font/nunito_extrabold"
-                android:textSize="@dimen/_16sdp"
+                android:fontFamily="@font/baloo"
+                android:textSize="@dimen/_14sdp"
                 android:background="@drawable/confirmbutton"/>
     </LinearLayout>
 

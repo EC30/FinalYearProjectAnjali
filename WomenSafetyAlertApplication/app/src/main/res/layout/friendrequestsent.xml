@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="150dp"
     android:layout_margin="10dp"
     android:orientation="horizontal"
     android:id="@+id/requestSentLinearLayout"
     android:background="@drawable/coloredborder">
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/requestSentImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             android:paddingTop="5dp"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_14sdp"
             android:text="Friend name"
-            android:fontFamily="@font/nunito_semibold"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/color5"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             android:paddingTop="10dp"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/nunito_semibold"
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/color5"
             android:text="Number"
             android:textStyle="italic" />
@@ -51,9 +51,9 @@
             android:id="@+id/deleteSentRequestButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/nunito_extrabold"
-            android:textSize="@dimen/_16sdp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/baloo"
+            android:textSize="@dimen/_14sdp"
             android:background="@drawable/deletebutton"
             android:text="DELETE REQUEST" />
     </LinearLayout>

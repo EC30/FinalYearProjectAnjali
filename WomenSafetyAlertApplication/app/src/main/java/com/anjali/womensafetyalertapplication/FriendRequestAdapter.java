@@ -95,7 +95,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
             public void onClick(View v) {
                 AlertDialog.Builder builder1=new AlertDialog.Builder(context);
                 builder1.setTitle("Confirmation !!");
-                builder1.setMessage("Do you want to delete "+holder.friendNumberRequest.getText().toString()+"?");
+                builder1.setMessage("Do you want to delete request from "+holder.friendNumberRequest.getText().toString()+"?");
                 builder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

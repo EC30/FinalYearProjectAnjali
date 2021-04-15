@@ -160,60 +160,69 @@ public class AddECActivity extends AppCompatActivity {
         input_emergencyphoneText=dialogView.findViewById(R.id.input_emergencyphoneText);
         countryCode=dialogView.findViewById(R.id.countryPicker);
 
-        builder.setView(dialogView)
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setView(dialogView);
+         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
-                })
-                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                });
+         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String cc = countryCode.getSelectedCountryCodeWithPlus().toString();
-                        String emergencyContact = input_emergencyphoneText.getText().toString();
 
-                        int new_index = econtacts.indexOf("NULL-VAL");
-                        //Toast.makeText(AddECActivity.this, String.valueOf(new_index), Toast.LENGTH_SHORT).show();
-
-                        //new_index+=1;
-                        PhoneNumberUtil pu=PhoneNumberUtil.createInstance(AddECActivity.this);
-                        Phonenumber.PhoneNumber num=new Phonenumber.PhoneNumber();
-                        num.setCountryCode(Integer.valueOf(cc));
-                        num.setNationalNumber(Long.valueOf(emergencyContact));
-
-                        if (phone_logged2.equals(cc + emergencyContact)) {
-                            Toast.makeText(AddECActivity.this, "You cannot add yourself as an emergency contact", Toast.LENGTH_SHORT).show();
-                        } else if (econtacts.contains(cc + "@@" + emergencyContact)) {
-                            Toast.makeText(AddECActivity.this, "Emergency contacts already added.", Toast.LENGTH_SHORT).show();
-                        } else if(!pu.isValidNumber(num)){
-                            Toast.makeText(AddECActivity.this, "Invalid Number", Toast.LENGTH_SHORT).show();
-                        } else{
-                            VolleyHandlerEC vh = new VolleyHandlerEC();
-                            vh.process_to_db(AddECActivity.this, "insert", cc + "@@" + emergencyContact,"", phone_logged2);
-
-                            DbHelper db = new DbHelper(AddECActivity.this);
-                            db.update_wsaa(edataof.get(new_index), cc + "@@" + emergencyContact);
-                            econtacts.set(new_index, cc + "@@" + emergencyContact);
-                            db.close();
-
-                            ecnum.add(edataof.get(new_index));
-                            ecCountryCode.add(cc);
-                            emergencynumber.add(emergencyContact);
-                            HomeActivity.eccontacts_home.add(cc + emergencyContact);
-                            ecAdapter.notifyDataSetChanged();
-                            emergencyContactRecyclerView.setVisibility(View.VISIBLE);
-                            empty.setVisibility(View.INVISIBLE);
-                            if (emergencynumber.size() == 3) {
-                                floatingButton.setVisibility(View.INVISIBLE);
-                            } else {
-                                floatingButton.setVisibility(View.VISIBLE);
-                            }
-                        }
                     }
 
                 });
-        builder.show();
+         AlertDialog dialogueee=builder.create();
+         dialogueee.show();
+         dialogueee.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 String cc = countryCode.getSelectedCountryCodeWithPlus().toString();
+                 String emergencyContact = input_emergencyphoneText.getText().toString();
+
+                 int new_index = econtacts.indexOf("NULL-VAL");
+                 //Toast.makeText(AddECActivity.this, String.valueOf(new_index), Toast.LENGTH_SHORT).show();
+
+                 //new_index+=1;
+                 PhoneNumberUtil pu=PhoneNumberUtil.createInstance(AddECActivity.this);
+                 Phonenumber.PhoneNumber num=new Phonenumber.PhoneNumber();
+                 num.setCountryCode(Integer.valueOf(cc));
+                 num.setNationalNumber(Long.valueOf(emergencyContact));
+
+                 if (phone_logged2.equals(cc + emergencyContact)) {
+                     Toast.makeText(AddECActivity.this, "You cannot add yourself as an emergency contact", Toast.LENGTH_SHORT).show();
+                 } else if (econtacts.contains(cc + "@@" + emergencyContact)) {
+                     Toast.makeText(AddECActivity.this, "Emergency contacts already added.", Toast.LENGTH_SHORT).show();
+                 } else if(!pu.isValidNumber(num)){
+                     Toast.makeText(AddECActivity.this, "Invalid Number", Toast.LENGTH_SHORT).show();
+                 } else{
+                     VolleyHandlerEC vh = new VolleyHandlerEC();
+                     vh.process_to_db(AddECActivity.this, "insert", cc + "@@" + emergencyContact,"", phone_logged2);
+
+                     DbHelper db = new DbHelper(AddECActivity.this);
+                     db.update_wsaa(edataof.get(new_index), cc + "@@" + emergencyContact);
+                     econtacts.set(new_index, cc + "@@" + emergencyContact);
+                     db.close();
+
+                     ecnum.add(edataof.get(new_index));
+                     ecCountryCode.add(cc);
+                     emergencynumber.add(emergencyContact);
+                     HomeActivity.eccontacts_home.add(cc + emergencyContact);
+                     ecAdapter.notifyDataSetChanged();
+                     emergencyContactRecyclerView.setVisibility(View.VISIBLE);
+                     empty.setVisibility(View.INVISIBLE);
+                     if (emergencynumber.size() == 3) {
+                         floatingButton.setVisibility(View.INVISIBLE);
+                     } else {
+                         floatingButton.setVisibility(View.VISIBLE);
+                     }
+                     dialogueee.dismiss();
+                 }
+             }
+         });
+       // builder.show();
 
 
     }

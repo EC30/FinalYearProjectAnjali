@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -58,7 +57,7 @@ public class FriendRequestSentAdapter extends RecyclerView.Adapter<FriendRequest
             public void onClick(View v) {
                 AlertDialog.Builder builder1=new AlertDialog.Builder(context);
                 builder1.setTitle("Confirmation !!");
-                builder1.setMessage("Do you want to delete "+holder.requestSentNumber.getText().toString()+"?");
+                builder1.setMessage("Do you want to delete sent request to"+holder.requestSentNumber.getText().toString()+"?");
                 builder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

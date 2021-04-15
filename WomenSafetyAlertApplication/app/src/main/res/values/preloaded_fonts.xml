@@ -3,6 +3,11 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aclonica</item>
         <item>@font/baloo</item>
+        <item>@font/boogaloo</item>
+        <item>@font/cabin_sketch</item>
+        <item>@font/comfortaa_light</item>
+        <item>@font/coustard</item>
+        <item>@font/montserrat</item>
         <item>@font/nunito_extrabold</item>
         <item>@font/nunito_semibold</item>
     </array>

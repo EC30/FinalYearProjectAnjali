@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,7 +30,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.hbb20.CountryCodePicker;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -39,12 +37,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
-import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
-import io.michaelrocks.libphonenumber.android.Phonenumber;
-
-import static com.anjali.womensafetyalertapplication.HomeActivity.phone_logged_home;
 
 public class ProfileActivity extends AppCompatActivity {
     static ImageView profileImage;
@@ -74,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
         UrlClass my_url= new UrlClass();
         String load_url=my_url.getUrl()+"upload/"+HomeActivity.phone_logged_home.substring(1)+".jpg";
 
-        Picasso.with(ProfileActivity.this).load(load_url).placeholder(R.drawable.user_image).into(profileImage,
+        Picasso.with(ProfileActivity.this).load(load_url).placeholder(R.drawable.user_img).into(profileImage,
                 new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
@@ -88,18 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     }
                 });
-//        UrlClass my_url= new UrlClass();
-//        String load_url=my_url.getUrl()+"upload/"+HomeActivity.phone_logged_home.substring(1)+".jpg";
-//        LoadPhoto task1=new LoadPhoto();
-//        Bitmap myimage=null;
-//        try {
-//            myimage=task1.execute(load_url).get();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        profileImage.setImageBitmap(myimage);
+
 
         btn_changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,73 +164,136 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        builder.setView(dialogView)
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setView(dialogView);
+         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
-                })
-                .setPositiveButton("Change", new DialogInterface.OnClickListener() {
+                });
+         builder.setPositiveButton("Change", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        oldpassw=input_oldpassword.getText().toString();
-                        rpasswd = input_resetPassword.getText().toString();
-                        crpasswd = input_confirmResetPassword.getText().toString();
-                        if(oldpassw.equals("") || rpasswd.equals("") || crpasswd.equals("")){
-                            Toast.makeText(ProfileActivity.this, "Please fill the respective fields", Toast.LENGTH_SHORT).show();
-                        }else if(rpasswd.length()<8){
-                            Toast.makeText(ProfileActivity.this, "Password must be 8 charcters long", Toast.LENGTH_SHORT).show();
-                        }
-                        else if (!rpasswd.equals(crpasswd)) {
-                            Toast.makeText(ProfileActivity.this, "Sorry! Password and confirm password does not match", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            String newps = input_resetPassword.getText().toString();
-                            UrlClass myurl = new UrlClass();
-                            String url = myurl.getUrl();
-                            String cpUrl = url + "changepassword.php";
-
-                            RequestQueue requestQueue = Volley.newRequestQueue(ProfileActivity.this);
-                            StringRequest stringRequest = new StringRequest(Request.Method.POST, cpUrl, new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    if (response.contains("Password Updated Successfully.")) {
-                                        Toast.makeText(ProfileActivity.this, "Password Changed successfully.", Toast.LENGTH_SHORT).show();
-                                    } else if (response.contains("Cannot change password.")) {
-                                        Toast.makeText(ProfileActivity.this, "Cannot change password", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(ProfileActivity.this, "* Internal Error. Please try again later.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            }) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("phone_login", phonelogged2);
-                                    params.put("passwd_old", oldpassw);
-                                    params.put("passwd_new", newps);
-                                    return params;
-                                }
-
-                                @Override
-                                public Map<String, String> getHeaders() throws AuthFailureError {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("Content-Type", "application/x-www-form-urlencoded");
-                                    return params;
-                                }
-                            };
-                            requestQueue.add(stringRequest);
-                    }
+//                        oldpassw=input_oldpassword.getText().toString();
+//                        rpasswd = input_resetPassword.getText().toString();
+//                        crpasswd = input_confirmResetPassword.getText().toString();
+//                        if(oldpassw.equals("") || rpasswd.equals("") || crpasswd.equals("")){
+//                            Toast.makeText(ProfileActivity.this, "Please fill the respective fields", Toast.LENGTH_SHORT).show();
+//                        }else if(rpasswd.length()<8){
+//                            Toast.makeText(ProfileActivity.this, "Password must be 8 charcters long", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else if (!rpasswd.equals(crpasswd)) {
+//                            Toast.makeText(ProfileActivity.this, "Sorry! Password and confirm password does not match", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            String newps = input_resetPassword.getText().toString();
+//                            UrlClass myurl = new UrlClass();
+//                            String url = myurl.getUrl();
+//                            String cpUrl = url + "changepassword.php";
+//
+//                            RequestQueue requestQueue = Volley.newRequestQueue(ProfileActivity.this);
+//                            StringRequest stringRequest = new StringRequest(Request.Method.POST, cpUrl, new Response.Listener<String>() {
+//                                @Override
+//                                public void onResponse(String response) {
+//                                    if (response.contains("Password Updated Successfully.")) {
+//                                        Toast.makeText(ProfileActivity.this, "Password Changed successfully.", Toast.LENGTH_SHORT).show();
+//                                    } else if (response.contains("Cannot change password.")) {
+//                                        Toast.makeText(ProfileActivity.this, "Cannot change password", Toast.LENGTH_SHORT).show();
+//                                    } else {
+//                                        Toast.makeText(ProfileActivity.this, "* Internal Error. Please try again later.", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            }, new Response.ErrorListener() {
+//                                @Override
+//                                public void onErrorResponse(VolleyError error) {
+//                                    Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            }) {
+//                                @Override
+//                                protected Map<String, String> getParams() {
+//                                    Map<String, String> params = new HashMap<String, String>();
+//                                    params.put("phone_login", phonelogged2);
+//                                    params.put("passwd_old", oldpassw);
+//                                    params.put("passwd_new", newps);
+//                                    return params;
+//                                }
+//
+//                                @Override
+//                                public Map<String, String> getHeaders() throws AuthFailureError {
+//                                    Map<String, String> params = new HashMap<String, String>();
+//                                    params.put("Content-Type", "application/x-www-form-urlencoded");
+//                                    return params;
+//                                }
+//                            };
+//                            requestQueue.add(stringRequest);
+//                    }
                     }
 
                 });
-        builder.show();
+         AlertDialog alertDialog=builder.create();
+         alertDialog.show();
+         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 oldpassw=input_oldpassword.getText().toString();
+                 rpasswd = input_resetPassword.getText().toString();
+                 crpasswd = input_confirmResetPassword.getText().toString();
+                 if(oldpassw.equals("") || rpasswd.equals("") || crpasswd.equals("")){
+                     Toast.makeText(ProfileActivity.this, "Please fill the respective fields", Toast.LENGTH_SHORT).show();
+                 }else if(rpasswd.length()<8){
+                     Toast.makeText(ProfileActivity.this, "Password must be 8 charcters long", Toast.LENGTH_SHORT).show();
+                 }
+                 else if (!rpasswd.equals(crpasswd)) {
+                     Toast.makeText(ProfileActivity.this, "Sorry! Password and confirm password does not match", Toast.LENGTH_SHORT).show();
+                 }
+                 else {
+                     String newps = input_resetPassword.getText().toString();
+                     UrlClass myurl = new UrlClass();
+                     String url = myurl.getUrl();
+                     String cpUrl = url + "changepassword.php";
+
+                     RequestQueue requestQueue = Volley.newRequestQueue(ProfileActivity.this);
+                     StringRequest stringRequest = new StringRequest(Request.Method.POST, cpUrl, new Response.Listener<String>() {
+                         @Override
+                         public void onResponse(String response) {
+                             if (response.contains("Password Updated Successfully.")) {
+                                 Toast.makeText(ProfileActivity.this, "Password Changed successfully.", Toast.LENGTH_SHORT).show();
+                             } else if (response.contains("Cannot change password.")) {
+                                 Toast.makeText(ProfileActivity.this, "Cannot change password", Toast.LENGTH_SHORT).show();
+                             } else if (response.contains("Old Password Incorrect.")) {
+                                 Toast.makeText(ProfileActivity.this, "Your old password is incorrect.", Toast.LENGTH_SHORT).show();
+                             } else {
+                                 Toast.makeText(ProfileActivity.this, "* Internal Error. Please try again later.", Toast.LENGTH_SHORT).show();
+                             }
+                         }
+                     }, new Response.ErrorListener() {
+                         @Override
+                         public void onErrorResponse(VolleyError error) {
+                             Toast.makeText(ProfileActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                         }
+                     }) {
+                         @Override
+                         protected Map<String, String> getParams() {
+                             Map<String, String> params = new HashMap<String, String>();
+                             params.put("phone_login", phonelogged2);
+                             params.put("passwd_old", oldpassw);
+                             params.put("passwd_new", newps);
+                             return params;
+                         }
+
+                         @Override
+                         public Map<String, String> getHeaders() throws AuthFailureError {
+                             Map<String, String> params = new HashMap<String, String>();
+                             params.put("Content-Type", "application/x-www-form-urlencoded");
+                             return params;
+                         }
+                     };
+                     requestQueue.add(stringRequest);
+                     alertDialog.dismiss();
+                 }
+             }
+         });
+       // builder.show();
 
 
     }

@@ -93,6 +93,9 @@ public class SignUpActivity extends AppCompatActivity {
                     checkPhoneExists(url, phone);
                 }else{
                     String error="* ";
+                    if(input_signUp_phone.getText().toString().equals("") || fullName.getText().toString().equals("") || passwd.getBytes().toString().equals("") || passwd2.getBytes().toString().equals("")){
+                        error+="Please fill all the required fields.";
+                    }
                     if(input_signUp_phone.getText().toString().equals("")){
                         error+="Phone Number cannot be empty.";
                     }else if(fullname.length()<6){
@@ -175,7 +178,6 @@ public class SignUpActivity extends AppCompatActivity {
                 params.put("phone_to_check", phone2);
                 return params;
             }
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();

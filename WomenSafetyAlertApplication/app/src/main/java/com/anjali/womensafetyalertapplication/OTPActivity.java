@@ -3,8 +3,10 @@ package com.anjali.womensafetyalertapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -75,8 +77,19 @@ public class OTPActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                Toast.makeText(OTPActivity.this, "Invalid Phone number", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(OTPActivity.this, "Invalid Phone number", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(OTPActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+               // loadingBar.dismiss();
                 loadingBar.dismiss();
+                new AlertDialog.Builder(OTPActivity.this)
+                        .setTitle("Error")
+                        .setMessage(e.getMessage())
+                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).create().show();
             }
 
             @Override

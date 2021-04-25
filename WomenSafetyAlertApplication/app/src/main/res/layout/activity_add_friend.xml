@@ -45,7 +45,7 @@
 
             <RelativeLayout
                 android:layout_width="177dp"
-                android:background="@drawable/coloredborder"
+                android:background="@drawable/cardviewgradient2"
                 android:layout_height="match_parent">
 
                 <TextView
@@ -56,8 +56,10 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
                     android:text="My Circle"
-                    android:textSize="20sp"
-                    app:fontFamily="@font/baloo" />
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/montserrat" />
 
                 <ImageView
                     android:id="@+id/myCircleImage"
@@ -80,7 +82,7 @@
             android:layout_weight="1">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/coloredborder"
+                android:background="@drawable/cardviewgradient3"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/viewRequestText"
@@ -91,8 +93,10 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
                     android:text="View Request"
-                    android:textSize="20sp"
-                    app:fontFamily="@font/baloo" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    app:fontFamily="@font/montserrat"/>
                 <ImageView
                     android:id="@+id/viewRequestImageView"
                     android:layout_width="100dp"
@@ -127,7 +131,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/coloredborder"
+                android:background="@drawable/cardviewgradient1"
                 android:layout_height="match_parent">
 
                 <TextView
@@ -139,15 +143,17 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
                     android:text="Add Friends"
-                    android:textSize="20sp"
-                    app:fontFamily="@font/baloo" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    app:fontFamily="@font/montserrat" />
 
                 <ImageView
                     android:id="@+id/addFriendImageView"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="18dp"
                     app:srcCompat="@drawable/addfriend" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -163,7 +169,7 @@
             android:layout_weight="1">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/coloredborder"
+                android:background="@drawable/cardviewgradient5"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/sentRequestTextView"
@@ -172,16 +178,18 @@
                     android:layout_below="@id/sentRequestImageView"
                     android:textAlignment="center"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:text="My Sent Request"
-                    android:textSize="20sp"
-                    app:fontFamily="@font/baloo" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    app:fontFamily="@font/montserrat" />
                 <ImageView
                     android:id="@+id/sentRequestImageView"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_height="75dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     app:srcCompat="@drawable/sentrequest" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -200,7 +208,7 @@
         android:layout_weight="1">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@drawable/coloredborder"
+            android:background="@drawable/cardviewgradient4"
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/viewFriendsLocationTextView"
@@ -208,10 +216,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewFriendsLocationImage"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:text="View Friends Location"
-                android:textSize="20sp"
-                app:fontFamily="@font/baloo" />
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                app:fontFamily="@font/montserrat" />
             <ImageView
                 android:id="@+id/viewFriendsLocationImage"
                 android:layout_width="120dp"

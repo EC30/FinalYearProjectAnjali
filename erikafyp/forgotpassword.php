@@ -3,7 +3,7 @@
 include ('database_connect.php');
 
 $phone=$_POST['phone_logged2'];
-$passwd=$_POST['password_new'];
+$passwd=md5($_POST['password_new']);
 
 echo $phone."---".$passwd;
 

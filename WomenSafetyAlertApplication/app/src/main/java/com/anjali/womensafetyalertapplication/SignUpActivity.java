@@ -3,7 +3,9 @@ package com.anjali.womensafetyalertapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class SignUpActivity extends AppCompatActivity {
+public class  SignUpActivity extends AppCompatActivity {
     private Button signUp;
     public EditText input_signUp_phone,input_signUp_password,input_confirmPassword,fullName;
     private CountryCodePicker countryPicker;
@@ -120,8 +122,18 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                Toast.makeText(SignUpActivity.this, "Invalid Phone number", Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
+                new AlertDialog.Builder(SignUpActivity.this)
+                    .setTitle("Error")
+                    .setMessage(e.getMessage())
+                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).create().show();
+               // Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                //loadingBar.dismiss();
             }
 
             @Override

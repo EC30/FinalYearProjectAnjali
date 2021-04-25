@@ -297,7 +297,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void makePhoneCall() {
-        String number="+9779842141667";
+        String number="1145";
         if(ContextCompat.checkSelfPermission(HomeActivity.this,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(HomeActivity.this,
@@ -356,6 +356,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 editor.remove("user_logged");
                 editor.remove("fullname_logged_in");
                 editor.commit();
+                Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
                 Intent intent2=new Intent(HomeActivity.this,MainActivity.class);
                 startActivity(intent2);
                 break;

@@ -5,9 +5,10 @@ $server_user_name='root';
 $server_password='';
 $database_name='wsdb';
 $table_name="registration";
-$ec_table_name="emergencycontact";
+$ec_table_name="emergencycontactdb";
 $fr_table_name="friends";
 $loc_table_name="my_location";
+$image_table_name="imageupload";
 
 $my_connection_server=mysqli_connect($server_name,$server_user_name,$server_password) or die("Cannot Connect To Server");
 
@@ -27,13 +28,13 @@ if($my_database){
 	}
 }
 
-$table1="CREATE TABLE IF NOT EXISTS $table_name (fullname VARCHAR(255) NOT NULL, phone VARCHAR(15) NOT NULL, password VARCHAR(255) NOT NULL, gender VARCHAR(1) NOT NULL, PRIMARY KEY (phone))";
+$table1="CREATE TABLE IF NOT EXISTS $table_name (SN int NOT NULL AUTO_INCREMENT, fullname VARCHAR(255) NOT NULL, phone VARCHAR(15) NOT NULL, password VARCHAR(255) NOT NULL, gender VARCHAR(1) NOT NULL, PRIMARY KEY (SN))";
 //$table1="CREATE TABLE IF NOT EXISTS $table_name (fullname VARCHAR(255) NOT NULL, phone VARCHAR(15) NOT NULL, password VARCHAR(255) NOT NULL, gender VARCHAR(1) NOT NULL)";
-$table2="CREATE TABLE IF NOT EXISTS $ec_table_name (phone VARCHAR(20) NOT NULL, EC1 VARCHAR(20) NOT NULL,EC2 VARCHAR(20) NOT NULL,EC3 VARCHAR(20) NOT NULL, PRIMARY KEY (phone))";
+$table2="CREATE TABLE IF NOT EXISTS $ec_table_name (SN int NOT NULL AUTO_INCREMENT, Phone_logged_user VARCHAR(20) NOT NULL, EContactsPhone VARCHAR(20) NOT NULL, PRIMARY KEY (SN))";
 
-$table3="CREATE TABLE IF NOT EXISTS $fr_table_name (user_phone1 VARCHAR(20) NOT NULL, user_phone2 VARCHAR(20) NOT NULL,status VARCHAR(20) NOT NULL)";
+$table3="CREATE TABLE IF NOT EXISTS $fr_table_name (SN int NOT NULL AUTO_INCREMENT, user_phone1 VARCHAR(20) NOT NULL, user_phone2 VARCHAR(20) NOT NULL,status VARCHAR(20) NOT NULL, PRIMARY KEY (SN))";
 
-$table4="CREATE TABLE IF NOT EXISTS $loc_table_name (user_phone VARCHAR(20) NOT NULL, lat VARCHAR(20) NOT NULL,lon VARCHAR(20) NOT NULL)";
+$table4="CREATE TABLE IF NOT EXISTS $loc_table_name (SN int NOT NULL AUTO_INCREMENT, user_phone VARCHAR(20) NOT NULL, lat VARCHAR(20) NOT NULL,lon VARCHAR(20) NOT NULL, PRIMARY KEY (SN))";
 
 
 $table_query=mysqli_query($my_connection_server,$table1);

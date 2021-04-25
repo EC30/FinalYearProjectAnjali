@@ -13,12 +13,15 @@ $query="SELECT * FROM $table_name WHERE phone = '$phone'";
 
 //echo $query;
 $query1=mysqli_query($my_connection_server,$query);
-$row = mysqli_fetch_array($query1,MYSQLI_ASSOC);
-$count = mysqli_num_rows($query1);
+//$row = mysqli_fetch_array($query1,MYSQLI_ASSOC);
+//$count = mysqli_num_rows($query1);
 
-
-if($count==1){
-	echo "User Exists.";
+if(mysqli_num_rows($query1)>0){
+	while($row = mysqli_fetch_array($query1)) {
+		echo "User Exists.::".$row['fullname'];
+	}
+//if($count==1){
+	//echo "User Exists.";
 }else{
 	echo "User Not Exists.";
 }
